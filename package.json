@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "connect-livereload": "^0.6.1",
+    "ejs": "^3.0.2",
+    "express": "^4.17.3",
+    "livereload": "^0.9.3"
+  },
+  "scripts": {
+    "dev": "nodemon --ext js,html,ejs,css,scss server.js"
+  }
+}
