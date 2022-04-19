@@ -30,4 +30,8 @@ router.get("/order-test", (req, res) => {
   res.render("onboarding/order-test");
 });
 
+router.get("/sugi", (req, res) => {
+  res.render("onboarding/sugi");
+});
+
 module.exports = router;
