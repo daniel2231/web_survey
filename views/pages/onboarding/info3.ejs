@@ -1,0 +1,40 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3">
+      <h5>필수 숙지 사항</h5>
+      <p>
+        지금부터 귀하께서 참여하시게 될 주식 투자 상황은 실제 주식 시장과
+        비슷하게 설계되었으므로 주식 종목 가격은 라운드에 따라 변동합니다.
+        <br />
+        <br />
+        주식 종목 가격에 영향을 미치는 요소는 기업의 실적, 매출 등 기업 요소와
+        투자자의 투자 행위 요소로 나뉩니다.
+        <br />
+        <br />
+        기업의 실적, 매출에 따른 영향력은 호재와 악재에 따라 양과 음으로
+        움직이되 절대적 영향력은 무작위로 선정됩니다.
+      </p>
+    </div>
+    <div>
+      <div class="d-grid fixed-bottom">
+        <button
+          class="btn btn-primary py-3 rounded-0"
+          disabled
+          onclick="location.href='/onboarding/info4'"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+    <script>
+      let button = document.querySelector("button");
+      setTimeout(() => {
+        button.removeAttribute("disabled");
+      }, 15000);
+    </script>
+  </body>
+</html>

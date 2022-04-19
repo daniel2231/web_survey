@@ -1,0 +1,25 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3 text-center">
+      <h3>
+          <b>
+            본격적 투자
+            이전에 기능 숙지 등을 위해
+            연습 라운드를 수행하여 보겠습니다.
+            <br><br>
+            연습 라운드는 귀하의 수익률에 영향을 미치지 않습니다.
+            
+          </b>
+      </h3>
+    </div>
+    <script>
+      setTimeout(() => {
+        location.href = "/onboarding/order-test";
+      }, 5000);
+    </script>
+  </body>
+</html>

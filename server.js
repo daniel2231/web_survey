@@ -17,13 +17,21 @@ liveReloadServer.server.once("connection", () => {
 });
 app.use(connectLivereload());
 
-app.set("views", "./views/pages");
+app.set('views', __dirname + '/views/pages');
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+//Router
+const onboardingRouter = require("./router/onboardingRouter");
+app.use("/onboarding", onboardingRouter);
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("onboarding/index");
+});
+
+app.use(function (req, res, next) {
+  res.status(404).render("404");
 });
 
 app.listen(port, () => {

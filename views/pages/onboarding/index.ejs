@@ -1,9 +1,9 @@
 <html lang="en" class="h-100">
   <head>
-    <%- include('../partials/head'); %>
+    <%- include('../../partials/head'); %>
   </head>
   <body class="d-flex flex-column h-100">
-    <%- include('../partials/navbar') %>
+    <%- include('../../partials/navbar', {title: "Terms and agreement"}) %>
 
     <div class="p-3">
       <h5>연구 안내</h5>
@@ -62,19 +62,42 @@
           >동의합니다</label
         >
       </div>
-
     </div>
 
-    <div class="info-input mt-3 p-3">
-      <div class="mb-3">
-        <label for="info-name" class="form-label">참여자 성명</label>
-        <input type="text" class="form-control" id="nameInput" placeholder="name@example.com">
+    <form>
+      <div class="info-input mt-3 p-3">
+        <div class="mb-3">
+          <label for="info-name" class="form-label">참여자 성명</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameInput"
+            placeholder="참여자 성명"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="info-input" class="form-label"
+            >참여자 휴대폰번호(예: 01011112222)</label
+          >
+          <input
+            type=""
+            class="form-control"
+            id="phoneInput"
+            placeholder="01011112222"
+          />
+        </div>
+        <div class="d-grid">
+          <button
+            disabled
+            class="btn btn-primary"
+            id="submitBtn"
+          >
+            Submit
+          </button>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="info-input" class="form-label">참여자 휴대폰번호(예: 01011112222)</label>
-        <input type="" class="form-control" id="phoneInput" placeholder="name@example.com">
-      </div>
-    </div>
+    </form>
+
     <script>
       const checkBtn1 = document.querySelector("#btn-check1");
       const checkBtnLabel1 = document.querySelector("#btn-label1");
@@ -82,21 +105,45 @@
       const checkBtnLabel2 = document.querySelector("#btn-label2");
       const checkBtn3 = document.querySelector("#btn-check3");
       const checkBtnLabel3 = document.querySelector("#btn-label3");
+      // if check array is all true, submit button is enabled
+      const submitBtn = document.querySelector("#submitBtn");
+
+      let check = [false, false, false];
 
       checkBtn1.addEventListener("click", () => {
         checkBtn1.setAttribute("disabled", "");
         checkBtnLabel1.textContent = "동의 되었습니다";
+        check[0] = true;
+
+        if (check[0] && check[1] && check[2]) {
+          submitBtn.removeAttribute("disabled");
+        }
       });
 
       checkBtn2.addEventListener("click", () => {
         checkBtn2.setAttribute("disabled", "");
         checkBtnLabel2.textContent = "동의 되었습니다";
+        check[1] = true;
+
+        if (check[0] && check[1] && check[2]) {
+          submitBtn.removeAttribute("disabled");
+        }
       });
 
       checkBtn3.addEventListener("click", () => {
         checkBtn3.setAttribute("disabled", "");
         checkBtnLabel3.textContent = "동의 되었습니다";
+        check[2] = true;
+
+        if (check[0] && check[1] && check[2]) {
+          submitBtn.removeAttribute("disabled");
+        }
       });
+
+      submitBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          location.href = "onboarding/info"
+        });
     </script>
   </body>
 </html>

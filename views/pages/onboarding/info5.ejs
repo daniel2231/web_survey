@@ -1,0 +1,68 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3 text-center" >
+      <table class="table">
+        <tbody>
+          <tr style="color: red">
+            <td>입금</td>
+            <td style="color: black;">과외비</td>
+            <td>+ 600,000</td>
+          </tr>
+          <tr style="color: blue">
+            <td>출금</td>
+            <td style="color: black;">커피빈</td>
+            <td>- 11,000</td>
+          </tr>
+          <tr style="color: blue">
+            <td>출금</td>
+            <td style="color: black;">데이트 통장</td>
+            <td>- 200,000</td>
+          </tr>
+          <tr style="color: blue">
+            <td>출금</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-5">
+        이번 달 10일에 과외비로 50만원을 지급받고
+        <br />
+        <br />
+        생활비, 데이트 통장 등으로 지출하고 나니 얼마 남지 않은 내 돈..
+        <br />
+        <br />
+
+        미래를 위해 10만원의 잉여 소득으로 주식 투자를 하고자 주식 앱에 접속!
+        <br>
+        
+        <b>관심 종목들 중 투자를 해보고자 한다.</b>
+        <br />
+        <br />
+
+        주식 앱에 접속했더니 <b>나의 관심 리스트에 있던 주식들이</b> 보인다.
+      </p>
+    </div>
+    <div>
+      <div class="d-grid fixed-bottom">
+        <button
+          class="btn btn-primary py-3 rounded-0"
+          disabled
+          onclick="location.href='/onboarding/info6'"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+    <script>
+      let button = document.querySelector("button");
+      setTimeout(() => {
+        button.removeAttribute("disabled");
+      }, 5000);
+    </script>
+  </body>
+</html>
