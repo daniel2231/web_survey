@@ -80,7 +80,7 @@
             >참여자 휴대폰번호(예: 01011112222)</label
           >
           <input
-            type=""
+            type="number"
             class="form-control"
             id="phoneInput"
             placeholder="01011112222"
@@ -142,7 +142,17 @@
 
       submitBtn.addEventListener("click", function (event) {
           event.preventDefault();
-          location.href = "onboarding/info"
+          
+          const name = document.getElementById('nameInput').value;
+          const phone = document.getElementById('phoneInput').value;
+      
+          if (name.length && phone.length){
+            localStorage.setItem('name', JSON.stringify(name));
+            localStorage.setItem('phone', JSON.stringify(phone));
+            location.href = "onboarding/info"
+          } else{
+              alert('이름과 휴대폰 번호를 확인해주세요.');
+          }
         });
     </script>
   </body>
