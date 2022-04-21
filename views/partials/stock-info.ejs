@@ -1,13 +1,52 @@
-<div class="px-3" style="padding-top: 30px; text-align: center;">
+<div class="bg-white shadow-sm py-3 text-center fixed-top">
+  <div style="float: left; position: absolute; margin-left: 10px; vertical-align: center;">
+    <a class="navbar-brand" href="javascript:history.back()" style="text-decoration: none; color: black;"
+      ><i class="bi bi-chevron-left" style="font-size: 23px"></i
+    ></a>
+  </div>
+  <div>
+    <h3 style="font-weight: 500; margin-bottom: 0; width: 100%;">
+      <%= data.name %>
+    </h3>
+  </div>
+  <div></div>
+</div>
+
+<div class="px-3" style="padding-top: 30px; text-align: center">
   <img
     src="/images/<%= data.id %>-logo.png"
-    style="width: 80px; height: 80px; border-radius: 50px;"
+    style="width: 80px; height: 80px; border-radius: 50px; margin-bottom: 20px"
     alt="..."
   />
-  <h3 style="font-weight: 500; margin-bottom: 15px">
-    <%= data.name %>
-  </h3>
-  <h4 style="font-weight: 500; margin-bottom: 15px">
-    <%= data.price %>원
-  </h4>
+
+  <h1 style="font-weight: 500; margin-bottom: 15px"><%= data.price %> <span style="font-size: 19px;">원</span></h1>
+  <div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
 </div>
+<script>
+  let xValues = ["1달 전", "1주일 전", "어제", "현재"];
+  let yValues = [33514, 34600, 35100, 38150];
+
+  new Chart("myChart", {
+    type: "line",
+
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          fill: false,
+          lineTension: 0.3,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yValues,
+        },
+      ],
+    },
+    options: {
+      legend: {
+        display: false,
+      },
+    },
+  });
+</script>

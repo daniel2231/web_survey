@@ -85,25 +85,7 @@
       </div>
     </div>
 
-    <div class="d-flex fixed-bottom">
-      <div
-        class="timer text-center py-3 d-flex align-items-center justify-content-center"
-        style="width: 30%; font-size: 13px; background-color: white;"
-      >
-        <p style="margin: 0" class="timer"></p>
-      </div>
-      <div style="width: 100vw">
-        <button
-          class="btn btn-primary py-3 rounded-0"
-          disabled
-          onclick="location.href='/onboarding/info6'"
-          style="width: 100%"
-        >
-         주문
-        </button>
-      </div>
-    </div>
-    <script src="/js/timer.js">
-    </script>
+    <%- include('../../partials/timer', {btn: "주문"}) %>
+
   </body>
 </html>
