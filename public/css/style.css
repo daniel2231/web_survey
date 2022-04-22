@@ -1,6 +1,8 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
-* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+* {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
 
 body {
   word-wrap: break-word;
@@ -14,6 +16,17 @@ body {
 
 .btn.btn-primary[disabled] {
   opacity: 100;
-  background-color: #539BFF;
+  background-color: #539bff;
   border: none;
+}
+
+.popup-content {
+  position: absolute;
+  top: 10%;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

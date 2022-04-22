@@ -45,4 +45,17 @@ router.get("/survey", (req, res) => {
 router.get("/end", (req, res) => {
   res.render("onboarding/end");
 });
+
+router.get("/sugi-info", (req, res) => {
+  res.render("onboarding/sugi-info");
+});
+
+router.get("/ine", (req, res) => {
+  res.render("onboarding/ine");
+});
+
+router.get("/ine-info", (req, res) => {
+  res.render("onboarding/ine-info");
+});
+
 module.exports = router;
