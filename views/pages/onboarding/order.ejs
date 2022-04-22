@@ -1,0 +1,111 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+    <script src="/js/timer.js"> </script>
+  </head>
+  <style>
+      input{
+        border: none;
+        text-align:center;
+        font-size:large;
+      }
+      button{
+          background-color:gray;
+          border-radius:5px;
+          padding: 0 15px;
+      }
+      .key{
+          width:30%;
+          height: 30%;
+          border: none;
+          background-color:transparent;
+          font-weight: bold;
+      }
+      .submit{
+          position:absolute;
+          bottom: 0;
+          left:0;
+          width:100vw;
+      }
+  </style>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "주문"}) %>
+    <div class="mt-5 p-3 text-center">
+        <!-- <div>
+            <h3> 종목</h3>
+            <div>
+                <h2> 현재 가격</h2>
+                <h2> 30,100원</h2>
+            </div>
+        </div> -->
+        <div class="card" style="width:65vw; margin:auto">
+            <div class="card-header" style="display: flex; justify-content: space-between;">
+                <p style="margin:auto 0;"> 종목</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>현재 가격</p>
+              </blockquote>
+            </div>
+        </div>
+        <div>
+            <input type="text" placeholder="몇 주를 구매할까요" id="stock_num"> <br>
+            <button>전액 사용하기</button> <br>
+            <input type="text" placeholder="jdlsf">
+        </div>
+        <div>
+            <button class="key" onclick="btn_click(1)"> 1 </button>
+            <button class="key" onclick="btn_click(2)"> 2 </button>
+            <button class="key" onclick="btn_click(3)"> 3 </button> <br>
+
+            <button class="key" onclick="btn_click(4)"> 4 </button>
+            <button class="key" onclick="btn_click(5)"> 5 </button>
+            <button class="key" onclick="btn_click(6)"> 6 </button> <br>
+
+            <button class="key" onclick="btn_click(7)"> 7 </button>
+            <button class="key" onclick="btn_click(8)"> 8 </button>
+            <button class="key" onclick="btn_click(9)"> 9 </button> <br>
+
+            <button class="key" onclick="erase('all')"> 지우기 </button>
+            <button class="key" onclick="btn_click(0)"> 0 </button>
+            <button class="key" onclick="erase('one')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+              </svg>
+            </button>
+        </div>
+        <div class="d-flex fixed-bottom">
+            <div
+              class="timer text-center py-3 d-flex align-items-center justify-content-center"
+              style="width: 30%; font-size: 13px; background-color: white;"
+            >
+              <p style="margin: 0" class="timer"></p>
+            </div>
+            <div style="width: 100vw">
+              <button
+                class="btn btn-primary py-3 rounded-0"
+                style="width: 100%"
+              >
+               확인
+              </button>
+            </div>
+          </div>
+    </div>
+    <script>
+        function btn_click(num){
+            document.getElementById('stock_num').value += num;
+        }
+        function erase(type){
+            if (type == "all"){
+                document.getElementById('stock_num').value = '';
+            }else if (type == 'one' ){
+                var temp = document.getElementById('stock_num').value;
+                temp = temp.slice(0, -1);
+                document.getElementById('stock_num').value = temp;
+            }  
+        }
+    </script>
+  </body>
+</html>
