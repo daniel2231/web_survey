@@ -1,0 +1,191 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body
+    class=""
+    style="background-color: #fafafa; padding-bottom: 80px; padding-top: 60px"
+  >
+    <div class="bg-white shadow-sm py-3 text-center fixed-top">
+      <div
+        style="
+          float: left;
+          position: absolute;
+          margin-left: 10px;
+          vertical-align: center;
+        "
+      >
+        <a
+          class="navbar-brand"
+          href="javascript:history.back()"
+          style="text-decoration: none; color: black"
+          ><i class="bi bi-chevron-left" style="font-size: 23px"></i
+        ></a>
+      </div>
+      <div>
+        <h3 style="font-weight: 500; margin-bottom: 0; width: 100%">
+          수기이노텍
+        </h3>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="px-4 py-4">
+      <div class="d-flex align-items-center" style="margin-bottom: 16px">
+        <h3 class="mb-3" style="margin-bottom: 0 !important">투자 정보</h3>
+        <i
+          class="fa fa-question-circle help-button"
+          style="font-size: 20px; color: grey; margin-left: 10px"
+        ></i>
+        <p style="margin-bottom: 0 !important; margin-left: auto">
+          현재 기준 (10분 지연)
+        </p>
+      </div>
+
+      <table class="table">
+        <tbody class="text-center">
+          <tr>
+            <td style="font-weight: bold">1일 최고가</td>
+            <td>38,000원</td>
+            <td style="font-weight: bold">1일 최저가</td>
+            <td>37,990원</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">1일거래량 (개인, 순매수)</td>
+            <td>238천주</td>
+            <td style="font-weight: bold">1일 거래량 (기관, 순매수)</td>
+            <td>-85주</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">PER</td>
+            <td>38.23</td>
+            <td style="font-weight: bold">PBR</td>
+            <td>3.72</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">배당수익률</td>
+            <td>1.31%</td>
+            <td style="font-weight: bold">외국인 소진율</td>
+            <td>25.76</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="px-4 py-4">
+      <h3 class="mb-3">회사 소식</h3>
+
+      <table class="table">
+        <tbody class="text-center">
+          <tr>
+            <td style="font-weight: bold">4.6</td>
+            <td>
+              <b>2022년 1분기 실적 발표 예정</b><br />
+              전년 동기보다 상승할 것으로 예측
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">2.22</td>
+            <td>
+              <b>신규 시설 투자 결정</b>
+              <br />
+              4,130억원 양산라인 구축 투자
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">1.26</td>
+            <td>
+              <b>2021년 배당 결정</b>
+              <br />
+              주식 1주당 1000원 지급
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="px-4 py-4">
+      <h3 class="mb-3">매출액 및 영업이익</h3>
+    </div>
+    <div>
+      <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+    </div>
+    <%- include('../../partials/timer', {btn: "주문"}) %>
+
+    <script>
+
+      
+
+      let xValues = ["2018", "2019", "2020", "2021"];
+      let yValues = [55, 49, 44, 24, 15];
+      let barColors = ["red", "green", "blue", "orange", "brown"];
+
+      new Chart("myChart", {
+        type: "bar",
+        plugins: [ChartDataLabels],
+        data: {
+          labels: xValues,
+          datasets: [
+            {
+              label: "매출액",
+              backgroundColor: "orange",
+              data: [
+                {
+                  x: "2018",
+                  y: 2635,
+                },
+                {
+                  x: "2019",
+                  y: 4783,
+                },
+                {
+                  x: "2020",
+                  y: 6810,
+                },
+                {
+                  x: "2021",
+                  y: 8918,
+                },
+              ],
+            },
+            {
+              label: "영업이익",
+              backgroundColor: "green",
+              data: [
+                {
+                  x: "2018",
+                  y: 123,
+                },
+                {
+                  x: "2019",
+                  y: 256,
+                },
+                {
+                  x: "2020",
+                  y: 489,
+                },
+                {
+                  x: "2021",
+                  y: 782,
+                },
+              ],
+            },
+          ],
+        },
+        options: {
+          legend: { display: false },
+          plugins: {
+            datalabels: {
+              formatter: (val) => {
+                let returnValue = val.y;
+                return returnValue.toLocaleString() + " 억";
+              },
+              color: "black",
+              anchor: "end",
+              align: "end",
+            },
+          },
+        },
+      });
+    </script>
+    <script src="/js/popup.js"></script>
+  </body>
+</html>

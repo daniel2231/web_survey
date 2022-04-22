@@ -1,15 +1,24 @@
 <div class="bg-white shadow-sm py-3 text-center fixed-top">
-  <div style="float: left; position: absolute; margin-left: 10px; vertical-align: center;">
-    <a class="navbar-brand" href="javascript:history.back()" style="text-decoration: none; color: black;"
+  <div
+    style="
+      float: left;
+      position: absolute;
+      margin-left: 10px;
+      vertical-align: center;
+    "
+  >
+    <a
+      class="navbar-brand"
+      href="javascript:history.back()"
+      style="text-decoration: none; color: black"
       ><i class="bi bi-chevron-left" style="font-size: 23px"></i
     ></a>
   </div>
   <div>
-    <h3 style="font-weight: 500; margin-bottom: 0; width: 100%;">
+    <h3 style="font-weight: 500; margin-bottom: 0; width: 100%">
       <%= data.name %>
     </h3>
   </div>
-  <div></div>
 </div>
 
 <div class="px-3" style="padding-top: 30px; text-align: center">
@@ -19,12 +28,54 @@
     alt="..."
   />
 
-  <h1 style="font-weight: 500; margin-bottom: 15px"><%= data.price %> <span style="font-size: 19px;">원</span></h1>
+  <h1
+    class="counter"
+    data-target="<%= data.price %>"
+    style="font-weight: 500; margin-bottom: 1px"
+  >
+    <%= data.price %></span>
+  </h1>
+  <p><%= data.difference %> 원 (<%= data.ratio %>%)</p>
   <div>
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>
 </div>
+
+<div class="px-4 py-4">
+  <div class="d-grid gap-2">
+    <button
+      class="btn btn-primary py-3"
+      type="button"
+      onclick="location.href='<%= data.id %>-info'"
+      style="border-radius: 10px"
+    >
+      투자정보 및 현황 <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>
 <script>
+  // Selector
+  const counters = document.querySelectorAll(".counter");
+  const numberFormatter = Intl.NumberFormat("en-US");
+  // Main function
+  for (let n of counters) {
+    const updateCount = () => {
+      let target = n.getAttribute("data-target");
+      target = parseInt(target.split(",").join(""));
+
+      console.log(typeof target);
+      const count = parseInt(n.innerText); // change animation speed here
+      const inc = target / 100;
+      if (count < target) {
+        n.innerText = `${count + inc} 원`;
+        setTimeout(updateCount, 1);
+      } else {
+        n.innerText = `${target.toLocaleString()} 원`;
+      }
+    };
+    updateCount();
+  }
+
   let xValues = ["1달 전", "1주일 전", "어제", "현재"];
   let yValues = [33514, 34600, 35100, 38150];
 
@@ -46,6 +97,9 @@
     options: {
       legend: {
         display: false,
+      },
+      tooltips: {
+        enabled: false,
       },
     },
   });

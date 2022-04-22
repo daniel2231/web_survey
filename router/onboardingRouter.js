@@ -34,4 +34,16 @@ router.get("/sugi", (req, res) => {
   res.render("onboarding/sugi");
 });
 
+router.get("/sugi-info", (req, res) => {
+  res.render("onboarding/sugi-info");
+});
+
+router.get("/ine", (req, res) => {
+  res.render("onboarding/ine");
+});
+
+router.get("/ine-info", (req, res) => {
+  res.render("onboarding/ine-info");
+});
+
 module.exports = router;
