@@ -6,8 +6,4 @@ router.get("/start", (req, res) => {
   res.render("test/info");
 });
 
-router.get("/start-1", (req, res) => {
-  res.render("test/info-1");
-});
-
 module.exports = router;
