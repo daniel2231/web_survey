@@ -1,9 +1,17 @@
+require('dotenv').config();
+
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 8000;
-
 const bodyParser = require("body-parser");
 const path = require("path");
+
+
+// MongoDB
+// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(err => console.log(err));
 
 // Live reload code
 const livereload = require("livereload");

@@ -1,111 +1,157 @@
 <html lang="en" class="h-100">
   <head>
     <%- include('../../partials/head'); %>
-    <script src="/js/timer.js"> </script>
   </head>
   <style>
-      input{
-        border: none;
-        text-align:center;
-        font-size:large;
-      }
-      button{
-          background-color:gray;
-          border-radius:5px;
-          padding: 0 15px;
-      }
-      .key{
-          width:30%;
-          height: 30%;
-          border: none;
-          background-color:transparent;
-          font-weight: bold;
-      }
-      .submit{
-          position:absolute;
-          bottom: 0;
-          left:0;
-          width:100vw;
-      }
+    input {
+      border: none;
+      text-align: center;
+      font-size: large;
+      width: 80%        ;
+    }
+   
+    .key {
+      width: 30%;
+      padding: 30px 10px;
+      border: none;
+      background-color: transparent;
+      font-weight: bold;
+    }
+
   </style>
   <body class="d-flex flex-column h-100">
     <%- include('../../partials/navbar', {title: "주문"}) %>
     <div class="mt-5 p-3 text-center">
-        <!-- <div>
-            <h3> 종목</h3>
-            <div>
-                <h2> 현재 가격</h2>
-                <h2> 30,100원</h2>
-            </div>
-        </div> -->
-        <div class="card" style="width:65vw; margin:auto">
-            <div class="card-header" style="display: flex; justify-content: space-between;">
-                <p style="margin:auto 0;"> 종목</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
-              </svg>
-            </div>
-            <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                <p>현재 가격</p>
-              </blockquote>
-            </div>
-        </div>
-        <div>
-            <input type="text" placeholder="몇 주를 구매할까요" id="stock_num"> <br>
-            <button>전액 사용하기</button> <br>
-            <input type="text" placeholder="jdlsf">
-        </div>
-        <div>
-            <button class="key" onclick="btn_click(1)"> 1 </button>
-            <button class="key" onclick="btn_click(2)"> 2 </button>
-            <button class="key" onclick="btn_click(3)"> 3 </button> <br>
+      <h3 class="mb-3">잔고: <span class="bank_balance">100,000</span>원</h3>
+      <table class="table mb-5">
+        <tbody class="text-center">
+          <tr>
+            <td style="font-weight: bold">종목</td>
+            <td style="font-weight: bold">현재 가격</td>
+            <td style="font-weight: bold">주문 수량</td>
+            <td style="font-weight: bold">합계 금액</td>
+          </tr>
+          <tr>
+            <td >수기이노텍</td>
+            <td>38,150원</td>
+            <td class="stock1">0</td>
+            <td class="stock1_total">0</td>
 
-            <button class="key" onclick="btn_click(4)"> 4 </button>
-            <button class="key" onclick="btn_click(5)"> 5 </button>
-            <button class="key" onclick="btn_click(6)"> 6 </button> <br>
+          </tr>
+          <tr>
+            <td>인의전기</td>
+            <td>30,100원</td>
+            <td class="stock2">0</td>
+            <td class="stock2_total">0</td>
+          </tr>
+        </tbody>
+      </table>
 
-            <button class="key" onclick="btn_click(7)"> 7 </button>
-            <button class="key" onclick="btn_click(8)"> 8 </button>
-            <button class="key" onclick="btn_click(9)"> 9 </button> <br>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle mb-3"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <p class="stock_name" style="display: inline-block; width: 200px; height: 5px;">종목</p>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item">수기이노텍</a></li>
+          <li><a class="dropdown-item">인의전기</a></li>
+        </ul>
+      </div>
 
-            <button class="key" onclick="erase('all')"> 지우기 </button>
-            <button class="key" onclick="btn_click(0)"> 0 </button>
-            <button class="key" onclick="erase('one')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-              </svg>
-            </button>
-        </div>
-        <div class="d-flex fixed-bottom">
-            <div
-              class="timer text-center py-3 d-flex align-items-center justify-content-center"
-              style="width: 30%; font-size: 13px; background-color: white;"
-            >
-              <p style="margin: 0" class="timer"></p>
-            </div>
-            <div style="width: 100vw">
-              <button
-                class="btn btn-primary py-3 rounded-0"
-                style="width: 100%"
-              >
-               확인
-              </button>
-            </div>
-          </div>
-    </div>
+      <div >
+        <input style="font-size: 25px; margin-bottom: 20px;" type="text" placeholder="몇 주를 구매할까요" id="stock_num" />
+        <br />
+        <button class="btn btn-secondary" type="button">전액 사용하기</button>
+        <button class="btn btn-primary px-5 confirm" type="button" onclick="updateTable()">확인</button>
+        <br />
+      </div>
+      <div class="mb-5">
+        <button class="key" onclick="btn_click(1)">1</button>
+        <button class="key" onclick="btn_click(2)">2</button>
+        <button class="key" onclick="btn_click(3)">3</button> <br />
+
+        <button class="key" onclick="btn_click(4)">4</button>
+        <button class="key" onclick="btn_click(5)">5</button>
+        <button class="key" onclick="btn_click(6)">6</button> <br />
+
+        <button class="key" onclick="btn_click(7)">7</button>
+        <button class="key" onclick="btn_click(8)">8</button>
+        <button class="key" onclick="btn_click(9)">9</button> <br />
+
+        <button class="key" onclick="erase('all')">지우기</button>
+        <button class="key" onclick="btn_click(0)">0</button>
+        <button class="key" onclick="erase('one')">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-left"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+            />
+          </svg>
+        </button>
+      </div>
+      <%- include('../../partials/timer', {btn: "주문"}) %>
     <script>
-        function btn_click(num){
-            document.getElementById('stock_num').value += num;
+      let stock_button = document.querySelectorAll(".dropdown-item");
+      let selected_stock = document.querySelector(".stock_name").innerText;
+      let confirm_button = document.querySelector(".confirm");
+      let stock1 = document.querySelector(".stock1");
+      let stock2 = document.querySelector(".stock2");
+      let stock1_total = document.querySelector(".stock1_total");
+      let stock2_total = document.querySelector(".stock2_total");
+      let stock_num = document.getElementById("stock_num");
+      let bank_balance = document.querySelector(".bank_balance");
+      
+      for (let i = 0; i < stock_button.length; i++) {
+        stock_button[i].addEventListener("click", function () {
+          selected_stock = stock_button[i].innerText;
+          document.querySelector(".stock_name").innerText = selected_stock;
+        });
+      }
+
+      let updateTable = () => {
+        console.log('click')
+        if (selected_stock == "수기이노텍") {
+          stock1.innerText = stock_num.value.toLocaleString();
+          stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
+        } else if (selected_stock == "인의전기") {
+          stock2.innerText = stock_num.value.toLocaleString();
+          stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
+        } else {
+          console.log("no select")
         }
-        function erase(type){
-            if (type == "all"){
-                document.getElementById('stock_num').value = '';
-            }else if (type == 'one' ){
-                var temp = document.getElementById('stock_num').value;
-                temp = temp.slice(0, -1);
-                document.getElementById('stock_num').value = temp;
-            }  
+        bank_balance.innerHTML = (
+          100000 -
+          parseInt(stock1_total.innerText.replace(/,/g, "")) -
+          parseInt(stock2_total.innerText.replace(/,/g, ""))
+        ).toLocaleString();
+        stock_num.value = "";
+      }
+    
+      function btn_click(num) {
+        stock_num.value += num;
+      }
+
+      function erase(type) {
+        if (type == "all") {
+          stock_num.value = "";
+        } else if (type == "one") {
+          let temp = stock_num.value;
+          temp = temp.slice(0, -1);
+          stock_num.value = temp;
         }
+      }
     </script>
   </body>
 </html>

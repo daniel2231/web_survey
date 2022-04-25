@@ -3,9 +3,11 @@
     "bootstrap-icons": "^1.8.1",
     "chart.js": "^3.7.1",
     "connect-livereload": "^0.6.1",
+    "dotenv": "^16.0.0",
     "ejs": "^3.0.2",
     "express": "^4.17.3",
-    "livereload": "^0.9.3"
+    "livereload": "^0.9.3",
+    "mongoose": "^6.3.1"
   },
   "scripts": {
     "dev": "nodemon --ext js,html,ejs,css,scss server.js"
