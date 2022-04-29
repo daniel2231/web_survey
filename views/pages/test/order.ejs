@@ -32,15 +32,15 @@
             <td style="font-weight: bold">합계 금액</td>
           </tr>
           <tr>
-            <td >수기이노텍</td>
-            <td>38,150원</td>
+            <td >대한에너지솔루션</td>
+            <td>31,260원</td>
             <td class="stock1">0</td>
             <td class="stock1_total">0</td>
 
           </tr>
           <tr>
-            <td>인의전기</td>
-            <td>30,100원</td>
+            <td>케이배터리솔루션</td>
+            <td>30,010원</td>
             <td class="stock2">0</td>
             <td class="stock2_total">0</td>
           </tr>
@@ -58,8 +58,8 @@
           <p class="stock_name" style="display: inline-block; width: 200px; height: 5px;">종목</p>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item">수기이노텍</a></li>
-          <li><a class="dropdown-item">인의전기</a></li>
+          <li><a class="dropdown-item">대한에너지솔루션</a></li>
+          <li><a class="dropdown-item">케이배터리솔루션</a></li>
         </ul>
       </div>
 
@@ -101,7 +101,7 @@
           </svg>
         </button>
       </div>
-      <%- include('../../partials/timer', {btn: "주문", type: "onboarding"}) %>
+      <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
       let stock_button = document.querySelectorAll(".dropdown-item");
       let selected_stock = document.querySelector(".stock_name").innerText;
@@ -122,10 +122,10 @@
 
       let updateTable = () => {
         console.log('click')
-        if (selected_stock == "수기이노텍") {
+        if (selected_stock == "대한에너지솔루션") {
           stock1.innerText = stock_num.value.toLocaleString();
           stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
-        } else if (selected_stock == "인의전기") {
+        } else if (selected_stock == "케이배터리솔루션") {
           stock2.innerText = stock_num.value.toLocaleString();
           stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
         } else {

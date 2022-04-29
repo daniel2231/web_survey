@@ -34,18 +34,6 @@ router.get("/sugi", (req, res) => {
   res.render("onboarding/sugi");
 });
 
-router.get("/order", (req, res) => {
-  res.render("onboarding/order");
-});
-
-router.get("/survey", (req, res) => {
-  res.render("onboarding/survey");
-});
-
-router.get("/end", (req, res) => {
-  res.render("onboarding/end");
-});
-
 router.get("/sugi-info", (req, res) => {
   res.render("onboarding/sugi-info");
 });
@@ -56,6 +44,10 @@ router.get("/ine", (req, res) => {
 
 router.get("/ine-info", (req, res) => {
   res.render("onboarding/ine-info");
+});
+
+router.get("/order", (req, res) => {
+  res.render("onboarding/order");
 });
 
 module.exports = router;
