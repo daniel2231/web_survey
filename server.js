@@ -32,7 +32,11 @@ app.use(express.static("public"));
 
 //Router
 const onboardingRouter = require("./router/onboardingRouter");
+const adminRouter = require("./router/adminRouter");
+const testRouter = require("./router/testRouter");
 app.use("/onboarding", onboardingRouter);
+app.use("/admin", adminRouter);
+app.use("/test", testRouter);
 
 app.get("/", (req, res) => {
   res.render("onboarding/index");

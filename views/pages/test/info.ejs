@@ -1,0 +1,38 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3 text-center">
+      <h5>
+        이제 본 투자를 시작하겠습니다.
+        <br />
+        <br />
+        이번 투자의 수익률은 실험 참여비에 연동되어 지급됩니다.
+        <br />
+        <br />
+        준비가 되셨으면 ‘다음’을 눌러주세요.
+      </h5>
+    </div>
+    <div>
+      <div class="d-grid fixed-bottom">
+        <button
+          class="btn btn-primary py-3 rounded-0"
+          disabled
+          onclick="location.href='/test/order-test'"
+        >
+          다음
+        </button>
+      </div>
+    </div>
+    <script>
+      let button = document.querySelector("button");
+      setTimeout(() => {
+        button.removeAttribute("disabled");
+      }, 5000);
+
+      window.localStorage.removeItem("endTime")
+    </script>
+  </body>
+</html>

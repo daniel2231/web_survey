@@ -7,12 +7,12 @@
     style="background-color: #fafafa; padding-bottom: 80px; padding-top: 60px"
   >
     <%- include('../../partials/stock-info', {data: {name: "인의전기", id:
-    "ine", price: "301,000", difference: "+500", ratio: "1.6"}} ) %>
+    "ine", price: "30,100", difference: "+500", ratio: "1.6", priceArray:
+    "[32150, 32434, 31560, 30100]"}} ) %>
 
     <div class="px-4 py-4">
       <h3 class="mb-3">주요 사업</h3>
       <div class="d-flex justify-content-center">
-       
         <div class="text-center px-4">
           <i class="fa-solid fa-desktop mb-3" style="font-size: 50px"></i>
           <p>디스플레이</p>
@@ -20,6 +20,5 @@
       </div>
     </div>
     <%- include('../../partials/timer', {btn: "주문"}) %>
-
   </body>
 </html>

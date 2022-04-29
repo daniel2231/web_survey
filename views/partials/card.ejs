@@ -8,11 +8,15 @@
     align-items: center;
     margin-bottom: 12px;
   "
-  onclick="location.href = '/onboarding/<%= data.id %>'"
+  onclick="if (window.location.href.includes('/onboarding')) {
+    window.location.href = '/onboarding/<%= data.id %>';
+  } else {
+    window.location.href = '/test/<%= data.id %>';
+  }"
 >
   <img
     src="/images/<%= data.id %>-logo.png"
-    style="width: 80px; height: 80px; border-radius: 50px; padding: 10px"
+    style="width: 80px; height: 80px; border-radius: 25px; padding: 10px"
     alt="..."
   />
   <p

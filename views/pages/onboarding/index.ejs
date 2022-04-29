@@ -67,6 +67,15 @@
     <form>
       <div class="info-input mt-3 p-3">
         <div class="mb-3">
+          <label for="info-name" class="form-label">세션 코드</label>
+          <input
+            type="number"
+            class="form-control"
+            id="codeInput"
+            placeholder="세션 코드"
+          />
+        </div>
+        <div class="mb-3">
           <label for="info-name" class="form-label">참여자 성명</label>
           <input
             type="text"
@@ -87,11 +96,7 @@
           />
         </div>
         <div class="d-grid">
-          <button
-            disabled
-            class="btn btn-primary"
-            id="submitBtn"
-          >
+          <button disabled class="btn btn-primary" id="submitBtn">
             Submit
           </button>
         </div>
@@ -141,19 +146,21 @@
       });
 
       submitBtn.addEventListener("click", function (event) {
-          event.preventDefault();
-          
-          const name = document.getElementById('nameInput').value;
-          const phone = document.getElementById('phoneInput').value;
-      
-          if (name.length && phone.length){
-            localStorage.setItem('name', JSON.stringify(name));
-            localStorage.setItem('phone', JSON.stringify(phone));
-            location.href = "onboarding/info"
-          } else{
-              alert('이름과 휴대폰 번호를 확인해주세요.');
-          }
-        });
+        event.preventDefault();
+        
+        const code = document.getElementById("codeInput").value;
+        const name = document.getElementById("nameInput").value;
+        const phone = document.getElementById("phoneInput").value;
+
+        if (name.length && phone.length) {
+          localStorage.setItem("code", JSON.stringify(code));
+          localStorage.setItem("name", JSON.stringify(name));
+          localStorage.setItem("phone", JSON.stringify(phone));
+          location.href = "onboarding/info";
+        } else {
+          alert("코드 번호, 이름과 휴대폰 번호를 확인해주세요.");
+        }
+      });
     </script>
   </body>
 </html>

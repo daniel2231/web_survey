@@ -1,0 +1,42 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "Admin"}) %>
+    <div class="d-flex" style="margin: auto">
+      <div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >비밀번호</span
+          >
+          <input
+            id="input"
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button" onclick="checkPass()">
+            로그인
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function checkPass() {
+        let pass = document.getElementById("input").value;
+        if (pass == "abcd1234") {
+          location.href = "/admin";
+          localStorage.setItem("webToken", true);
+        } else {
+          alert("비밀번호가 일치하지 않습니다.");
+        }
+      }
+    </script>
+  </body>
+</html>
