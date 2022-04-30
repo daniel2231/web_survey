@@ -69,7 +69,7 @@
         <div class="mb-3">
           <label for="info-name" class="form-label">세션 코드</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="codeInput"
             placeholder="세션 코드"
@@ -147,16 +147,30 @@
 
       submitBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        
+
         const code = document.getElementById("codeInput").value;
         const name = document.getElementById("nameInput").value;
         const phone = document.getElementById("phoneInput").value;
 
-        if (name.length && phone.length) {
-          localStorage.setItem("code", JSON.stringify(code));
-          localStorage.setItem("name", JSON.stringify(name));
-          localStorage.setItem("phone", JSON.stringify(phone));
-          location.href = "onboarding/info";
+        if (code.length && name.length && phone.length) {
+          let data = {
+            session_code: code,
+            name: name,
+            phone: phone,
+            bank_balance: 100000,
+          };
+          fetch("/onboarding/new-user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }).then((res) => {
+            if (res.status == 404) {
+              alert("코드를 다시 확인하세요");
+            } else {
+              console.log("Request complete! response:", res);
+              window.location.href = "/onboarding/info";
+            }
+          });
         } else {
           alert("코드 번호, 이름과 휴대폰 번호를 확인해주세요.");
         }

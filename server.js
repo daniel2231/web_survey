@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -6,12 +6,12 @@ const app = express();
 const port = process.env.PORT || 8000;
 const bodyParser = require("body-parser");
 const path = require("path");
+const { MONGO_URI } = process.env;
 
-
-// MongoDB
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
-//   .then(() => console.log("Connected to MongoDB"))
-//   .catch(err => console.log(err));
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log(err));
 
 // Live reload code
 const livereload = require("livereload");
@@ -25,10 +25,11 @@ liveReloadServer.server.once("connection", () => {
 });
 app.use(connectLivereload());
 
-app.set('views', __dirname + '/views/pages');
+app.set("views", __dirname + "/views/pages");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.json())
 
 //Router
 const onboardingRouter = require("./router/onboardingRouter");

@@ -1,9 +1,35 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
+const User = require("../models/user");
+const Session = require("../models/session");
 
 router.get("/info", (req, res) => {
   res.render("onboarding/info");
+});
+
+router.post("/new-user", async (req, res) => {
+  const user = await new User(req.body);
+  // check Session DB for session_id and update user_count
+  Session.findOne({ session_id: req.body.session_code }, (err, session) => {
+    if (err) {
+      alert(err);
+    } else {
+      if (!session) {
+        res.sendStatus(404);
+      } else {
+        session.user_count++;
+        session.save();
+        user.save((err, user) => {
+          if (err) {
+            console.log(err);
+          } else {
+            //send res to client
+            res.sendStatus(200);
+          }
+        });
+      }
+    }
+  });
 });
 
 router.get("/info2", (req, res) => {

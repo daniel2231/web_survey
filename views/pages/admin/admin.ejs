@@ -5,48 +5,62 @@
   <body class="d-flex flex-column h-100" onload="checkWebToken()">
     <%- include('../../partials/navbar', {title: "Admin"}) %>
     <div class="d-flex flex-column text-center" style="margin: auto">
-      <div>
+      <div class="mt-5">
         <h1>새로운 세션 생성하기</h1>
-        <div class="d-grid">
-          <button class="btn btn-primary" type="button">생성하기</button>
+        <div class="d-grid mx-5">
+          <button
+            class="btn btn-primary "
+            type="button"
+            onclick="createSession()"
+          >
+            생성하기
+          </button>
         </div>
       </div>
       <div class="mt-5">
         <h1>현재 생성된 세션</h1>
-        <table class="table">
-            <thead>
+        <table class="table" style="font-size: 13px;">
+          <thead>
+            <tr>
+              <th>코드</th>
+              <th>시작시간</th>
+              <th>시간종료</th>
+              <th>인원</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i<sessions.length; i++) {%>
                 <tr>
-                <th>세션 코드</th>
-                <th>생성 시간</th>
-                <th>세션 상태</th>
+                    <td><%= sessions[i].session_id %></td>
+                    <td><%= sessions[i].start_time.toLocaleString("en-US") %></td>
+                    <td><%= sessions[i].end_time.toLocaleString("en-US") %></td>
+                    <td><%= sessions[i].user_count %></td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>세션1</td>
-                <td>2020-01-01</td>
-                <td>진행중</td>
-                </tr>
-                <tr>
-                <td>세션2</td>
-                <td>2020-01-01</td>
-                <td>진행중</td>
-                </tr>
-                <tr>
-                <td>세션3</td>
-                <td>2020-01-01</td>
-                <td>진행중</td>
-                </tr>
-            </tbody>
+             <% } %>
+          </tbody>
         </table>
       </div>
     </div>
 
     <script>
+      function createSession() {
+        fetch("/admin/create-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }).then((res) => {
+          console.log("Request complete! response:", res);
+            if (res.status == 200) {
+                location.reload();
+            } else {
+                alert("세션 생성에 실패했습니다.");
+            }
+        });
+      }
+
       function checkWebToken() {
-          if (localStorage.getItem("webToken") == null) {
-              location.href = "admin/login";
-          }
+        if (localStorage.getItem("webToken") == null) {
+          location.href = "admin/login";
+        }
       }
     </script>
   </body>
