@@ -1,0 +1,65 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <style>
+    p {
+      text-align: center;
+    }
+    table{
+        text-align:center;
+    }
+  </style>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "투자 결과"}) %>
+    <div class="mt-5 p-3">
+        <table class="table table-bordered">
+            <tr>
+                <td> </td>
+                <th>대한에너지솔루션</th>
+                <th>케이배터리솔루션</th>
+            </tr>
+            <tr>
+                <th>구매가</th>
+                <td>31,260원</td>
+                <td>30,010원</td>
+            </tr>
+            <tr>
+                <th>현재가</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>보유수량</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>수익</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th colspan="2">TOTAL</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th colspan="2">최종수익률</th>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+      <div class="d-grid fixed-bottom">
+        <button
+          class="btn btn-primary py-3 rounded-0 button-2"
+          onclick="location.href='/test/end'"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+    <script>
+    </script>
+  </body>
+</html>

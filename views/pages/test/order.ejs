@@ -20,29 +20,7 @@
 
   </style>
   <body class="d-flex flex-column h-100">
-    <div class="bg-white shadow-sm py-3 text-center fixed-top">
-      <div
-        style="
-          float: left;
-          position: absolute;
-          margin-left: 10px;
-          vertical-align: center;
-        "
-      >
-        <a
-          class="navbar-brand"
-          href="javascript:history.back()"
-          style="text-decoration: none; color: black"
-          ><i class="bi bi-chevron-left" style="font-size: 23px"></i
-        ></a>
-      </div>
-      <div>
-        <h3 style="font-weight: 500; margin-bottom: 0; width: 100%">
-          주문
-        </h3>
-      </div>
-      <div></div>
-    </div>
+    <%- include('../../partials/navbar', {title: "주문"}) %>
     <div class="mt-5 p-3 text-center">
       <h3 class="mb-3">잔고: <span class="bank_balance">100,000</span>원</h3>
       <table class="table mb-5">
@@ -54,15 +32,15 @@
             <td style="font-weight: bold">합계 금액</td>
           </tr>
           <tr>
-            <td >수기이노텍</td>
-            <td>38,150원</td>
+            <td >대한에너지솔루션</td>
+            <td>31,260원</td>
             <td class="stock1">0</td>
             <td class="stock1_total">0</td>
 
           </tr>
           <tr>
-            <td>인의전기</td>
-            <td>30,100원</td>
+            <td>케이배터리솔루션</td>
+            <td>30,010원</td>
             <td class="stock2">0</td>
             <td class="stock2_total">0</td>
           </tr>
@@ -80,17 +58,16 @@
           <p class="stock_name" style="display: inline-block; width: 200px; height: 5px;">종목</p>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item">수기이노텍</a></li>
-          <li><a class="dropdown-item">인의전기</a></li>
+          <li><a class="dropdown-item">대한에너지솔루션</a></li>
+          <li><a class="dropdown-item">케이배터리솔루션</a></li>
         </ul>
       </div>
 
       <div >
-        <input style="font-size: 20px; margin-bottom: 20px;" type="text" placeholder="몇 주를 구매할까요" id="stock_num" />
+        <input style="font-size: 25px; margin-bottom: 20px;" type="text" placeholder="몇 주를 구매할까요" id="stock_num" />
         <br />
-        <button class="btn btn-secondary" type="button" onclick="useAll()">전액 사용하기</button>
+        <button class="btn btn-secondary" type="button">전액 사용하기</button>
         <button class="btn btn-primary px-5 confirm" type="button" onclick="updateTable()">확인</button>
-        <button class="btn btn-primary px-5 confirm" type="button" onclick="updateTable()">초기화</button>
         <br />
       </div>
       <div class="mb-5">
@@ -124,7 +101,7 @@
           </svg>
         </button>
       </div>
-      <%- include('../../partials/timer', {btn: "주문", type: "onboarding"}) %>
+      <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
       let stock_button = document.querySelectorAll(".dropdown-item");
       let selected_stock = document.querySelector(".stock_name").innerText;
@@ -145,63 +122,25 @@
 
       let updateTable = () => {
         console.log('click')
-        
-
-
-          if (selected_stock == "수기이노텍") {
-            stock1.innerText = stock_num.value.toLocaleString();
-            stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
-          } else if (selected_stock == "인의전기") {
-            stock2.innerText = stock_num.value.toLocaleString();
-            stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
-          } else {
-            console.log("no select")
-          }
+        if (selected_stock == "대한에너지솔루션") {
+          stock1.innerText = stock_num.value.toLocaleString();
+          stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
+        } else if (selected_stock == "케이배터리솔루션") {
+          stock2.innerText = stock_num.value.toLocaleString();
+          stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
+        } else {
+          console.log("no select")
+        }
         bank_balance.innerHTML = (
           100000 -
           parseInt(stock1_total.innerText.replace(/,/g, "")) -
           parseInt(stock2_total.innerText.replace(/,/g, ""))
         ).toLocaleString();
         stock_num.value = "";
-        }
-        
-
+      }
     
       function btn_click(num) {
         stock_num.value += num;
-      }
-
-      function useAll() {
-        // get balance and use all balance to buy selected stock
-        let balance = bank_balance.innerText.replace(/,/g, "");
-        let stock_price = 0;
-        if (selected_stock == "수기이노텍") {
-          stock_price = 38150;
-        } else if (selected_stock == "인의전기") {
-          stock_price = 30100;
-        }
-        let stock_num = Math.floor(balance / stock_price);
-        stock_num = stock_num.toLocaleString();
-        if (selected_stock == "수기이노텍") {
-          //buy selected stock if bank balance is not negative
-
-          if (balance > 0) {
-            stock1.innerText = stock_num;
-            stock1_total.innerText = (stock_num * stock_price).toLocaleString();
-          } else {
-            stock1.innerText = 0;
-            stock1_total.innerText = 0;
-          }
-          
-        } else if (selected_stock == "인의전기") {
-          stock2.innerText = stock_num;
-          stock2_total.innerText = (stock_num * stock_price).toLocaleString();
-        }
-        bank_balance.innerHTML = (
-          100000 -
-          parseInt(stock1_total.innerText.replace(/,/g, "")) -
-          parseInt(stock2_total.innerText.replace(/,/g, ""))
-        ).toLocaleString();
       }
 
       function erase(type) {
