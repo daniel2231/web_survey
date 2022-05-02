@@ -31,7 +31,8 @@
       setTimeout(() => {
         button.removeAttribute("disabled");
       }, 5000);
-
+      
+      window.localStorage.setItem('balance', 100000);
       window.localStorage.removeItem("endTime")
     </script>
   </body>

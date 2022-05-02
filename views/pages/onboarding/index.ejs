@@ -159,6 +159,7 @@
             phone: phone,
             bank_balance: 100000,
           };
+          window.localStorage.setItem('balance', 100000);
           fetch("/onboarding/new-user", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
