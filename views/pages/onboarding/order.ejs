@@ -136,6 +136,9 @@
       let stock_num = document.getElementById("stock_num");
       let bank_balance = document.querySelector(".bank_balance");
       
+      let cur_balance = window.localStorage.getItem('balance');
+      bank_balance.innerText = cur_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
       for (let i = 0; i < stock_button.length; i++) {
         stock_button[i].addEventListener("click", function () {
           selected_stock = stock_button[i].innerText;
@@ -145,15 +148,24 @@
 
       let updateTable = () => {
         console.log('click')
-        
-
-
           if (selected_stock == "수기이노텍") {
-            stock1.innerText = stock_num.value.toLocaleString();
-            stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
+            let stock_price = stock_num.value * 38150 + parseInt(stock2_total.innerText.replace(/,/g, ""));
+            if (100000 >= stock_price){
+              stock1.innerText = stock_num.value.toLocaleString();
+              stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
+            } else{
+              stock_num.innerTest="";
+              alert('잔고가 부족합니다.');
+            }
           } else if (selected_stock == "인의전기") {
-            stock2.innerText = stock_num.value.toLocaleString();
-            stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
+            let stock_price = stock_num.value *30100 + parseInt(stock1_total.innerText.replace(/,/g, ""));
+            if( 100000 >= stock_price){
+              stock2.innerText = stock_num.value.toLocaleString();
+              stock2_total.innerText = (stock_num * 30100).toLocaleString();
+            } else{
+              stock_num.innerText ="";
+              alert("잔고가 부족합니다.");
+            }
           } else {
             console.log("no select")
           }
@@ -164,9 +176,7 @@
         ).toLocaleString();
         stock_num.value = "";
         }
-        
-
-    
+      
       function btn_click(num) {
         stock_num.value += num;
       }
