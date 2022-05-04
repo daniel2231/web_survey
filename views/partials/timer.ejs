@@ -8,8 +8,7 @@
   <div style="width: 100vw">
     <button
       class="btn btn-primary py-3 rounded-0"
-      
-      onclick="location.href='/<%= type %>/order'"
+      onclick="checkUrl()"
       style="width: 100%"
     >
       <%= btn %>
@@ -17,3 +16,36 @@
   </div>
 </div>
 <script src="/js/timer.js"></script>
+<script>
+  //if window url ends with order, change location href to end
+  function checkUrl() {
+    if (location.href.endsWith("order")) {
+      if (location.href.includes("/test/order")) {
+        let phone = localStorage.getItem("phone");
+        let stock1 = document.querySelector(".stock1").innerText;
+        let stock2 = document.querySelector(".stock2").innerText;
+        let session_code = localStorage.getItem("session_code");
+        console.log(phone, stock1, stock2);
+        fetch("/test/order-stock", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phone: phone,
+            stock1: stock1,
+            stock2: stock2,
+            session_code: session_code,
+          }),
+        }).then((data) => {
+          if (data.status === 200) {
+            //change location href to end
+            location.href = "/test/loading";
+          }
+        });
+      } 
+    } else {
+      location.href = "/<%= type %>/order";
+    }
+  }
+</script>

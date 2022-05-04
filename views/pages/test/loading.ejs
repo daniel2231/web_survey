@@ -1,0 +1,55 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3 text-center">
+      <h5>모든 투자자들이 투자를 끝내기 전까지 기다려 주세요.</h5>
+      <br />
+      <br />
+      <h5>
+        데이터는 5초마다 갱신되며, 모든 투자자가 투자를 끝내면 결과창으로
+        이동됩니다.
+      </h5>
+    </div>
+    <div class="mt-5 p-3 text-center">
+      <h5>남은 인원</h5>
+      <h5 class="user-count"></h5>
+    </div>
+    <script>
+      //every 5 seconds send fetch post request
+      let complete_users;
+      let user_count;
+      setInterval(() => {
+        fetch("/test/get-session-status", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            session_code: localStorage.getItem("session_code"),
+          }),
+        }).then((res) => {
+          if (res.status === 200) {
+            res.json().then((data) => {
+              if (data.status === "end") {
+                location.href = "/test/end";
+              } else {
+                console.log(data)
+                complete_users = Number(data.complete_users);
+                user_count = Number(data.user_count);
+                document.querySelector(
+                  ".user-count"
+                ).innerText = `${data.complete_users}/${data.user_count}`;
+                if (user_count === complete_users) {
+                  location.href = "/test/result";
+                }
+              }
+            });
+          }
+        });
+      }, 5000);
+    </script>
+  </body>
+</html>

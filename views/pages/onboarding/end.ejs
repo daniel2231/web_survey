@@ -1,0 +1,59 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "실험 전 안내사항"}) %>
+    <div class="mt-5 p-3">
+      <h5>대기 중</h5>
+      <p>
+        아래 타이머가 끝날 때 까지 기다려주세요. 타이머가 끝나면 자동으로 실험이 시작됩니다.
+        <br />
+        <br />
+        <h3 class="timer"></h3>
+      </p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function (event) {
+        // get timestamp
+
+        function countdown(elementName, minutes, seconds) {
+          let element, hours, mins, msLeft, time;
+
+          function twoDigits(n) {
+            return n <= 9 ? "0" + n : n;
+          }
+
+          function updateTimer() {
+            msLeft = endTime - +new Date();
+
+            if (msLeft < 1000) {
+                window.location.href = "/test/info";
+            } else {
+              time = new Date(msLeft);
+              hours = time.getUTCHours();
+              mins = time.getUTCMinutes();
+              element.innerHTML =
+                "⏰ &nbsp;" +
+                (hours ? hours + ":" + twoDigits(mins) : mins) +
+                ":" +
+                twoDigits(time.getUTCSeconds());
+              setTimeout(updateTimer, time.getUTCMilliseconds() + 500);
+            }
+          }
+
+          element = document.querySelector(elementName);
+          endTime =
+            +new Date(parseInt(window.localStorage.getItem("endTime"))) +
+            1000 * (60 * minutes + seconds) +
+            500;
+          console.log(endTime);
+
+          updateTimer();
+        }
+
+        countdown(".timer", 10, 0);
+      });
+    </script>
+  </body>
+</html>

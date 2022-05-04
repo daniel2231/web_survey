@@ -7,6 +7,9 @@ const sessionSchema = new mongoose.Schema(
     start_time: { type: Date, required: true },
     end_time: { type: Date, required: true },
     user_count: { type: Number, required: true },
+    complete_users: { type: Number, required: true },
+    stock1: { type: Number, required: true },
+    stock2: { type: Number, required: true },
   },
   {
     timestamps: true,

@@ -76,4 +76,7 @@ router.get("/order", (req, res) => {
   res.render("onboarding/order");
 });
 
+router.get("/end", (req, res) => {
+  res.render("onboarding/end");
+});
 module.exports = router;
