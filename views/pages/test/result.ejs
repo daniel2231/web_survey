@@ -116,8 +116,8 @@
           winnerStockRatio = 1.1;
           loserStockRatio = -1.1;
         } else {
-          winnerStockRatio = 1.1;
-          loserStockRatio = -1.1;
+          winnerStockRatio = 0;
+          loserStockRatio = 0;
         }
 
         let winnerStockPrice =
@@ -165,9 +165,13 @@
               stock1 = Number(data.stock1);
               stock2 = Number(data.stock2);
               result = getYield(stock1, stock2);
-              let stock1per = ((parseFloat(result[0].replace(/,/g, '')) * stock1) - (31260 * stock1))
-              let stock2per = ((parseFloat(result[1].replace(/,/g, '')) * stock2) - (30010 * stock2))
-              let total = (stock1per + stock2per)
+              let stock1per =
+                parseFloat(result[0].replace(/,/g, "")) * stock1 -
+                31260 * stock1;
+              let stock2per =
+                parseFloat(result[1].replace(/,/g, "")) * stock2 -
+                30010 * stock2;
+              let total = stock1per + stock2per;
 
               document.querySelector(".current_stock1").innerHTML =
                 result[0] + "원";
@@ -175,21 +179,18 @@
                 result[1] + "원";
               document.querySelector(".stock1").innerHTML = stock1 + "주";
               document.querySelector(".stock2").innerHTML = stock2 + "주";
-              
+
               document.querySelector(".stock1_per").innerHTML =
-               stock1per.toLocaleString("en-us") + "원";
+                stock1per.toLocaleString("en-us") + "원";
               document.querySelector(".stock2_per").innerHTML =
                 stock2per.toLocaleString("en-us") + "원";
               document.querySelector(".total").innerHTML =
                 total.toLocaleString("en-us") + "원";
               document.querySelector(".total_per").innerHTML =
-                ((total - 100000) / 100000).toLocaleString(
-                  "en-us",
-                  {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 2,
-                  }
-                ) + "%";
+                ((total - 200000) / 200000).toLocaleString("en-us", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2,
+                }) + "%";
             }
           });
         }

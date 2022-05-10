@@ -20,20 +20,40 @@
         <button
           class="btn btn-primary py-3 rounded-0"
           disabled
-          onclick="location.href='/test/order-test'"
+          onclick="checkCondition()"
         >
           다음
         </button>
       </div>
     </div>
     <script>
+      function checkCondition() {
+        fetch("/test/check-condition", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phoneNum: localStorage.getItem("phone"),
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === 404) {
+              alert("오류: 관리자에게 문의해주세요");
+            } else {
+              localStorage.setItem("condition", data.condition);
+              location.href = "/test/order-test";
+            }
+          });
+      }
       let button = document.querySelector("button");
       setTimeout(() => {
         button.removeAttribute("disabled");
       }, 5000);
-      
-      window.localStorage.setItem('balance', 100000);
-      window.localStorage.removeItem("endTime")
+
+      window.localStorage.setItem("balance", 200000);
+      window.localStorage.removeItem("endTime");
     </script>
   </body>
 </html>

@@ -8,7 +8,6 @@ router.get("/info", (req, res) => {
 });
 
 router.post("/new-user", async (req, res) => {
-  const user = await new User(req.body);
   // check Session DB for session_id and update user_count
   Session.findOne({ session_id: req.body.session_code }, (err, session) => {
     if (err) {
@@ -17,10 +16,31 @@ router.post("/new-user", async (req, res) => {
       if (!session) {
         res.sendStatus(404);
       } else {
+        function getRandomCondition() {
+          if (session.conditionA > 0) {
+            session.conditionA -= 1;
+            return "A";
+          } else if (session.conditionB > 0) {
+            session.conditionB -= 1;
+            return "B";
+          } else if (session.conditionC > 0) {
+            session.conditionC -= 1;
+            return "C";
+          } else if (session.conditionD > 0) {
+            session.conditionD -= 1;
+            return "D";
+          }
+        }
+        const user = new User({ ...req.body, condition: getRandomCondition() });
         session.user_count++;
-        session.save();
+        session.save((err, session) => {
+          if (err) {
+            res.sendStatus(500);
+          }
+        });
         user.save((err, user) => {
           if (err) {
+            res.sendStatus(500);
             console.log(err);
           } else {
             //send res to client

@@ -1,0 +1,127 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%- include('../../partials/navbar', {title: "Admin"}) %>
+    
+      <div class="mt-5 mx-2">
+        <h1>Session</h1>
+        <table class="table" style="font-size: 13px;">
+          <tbody>
+                <tr>
+                    <td>Session ID</td>
+                    <td>
+                        <%= session.session_id %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Start Time</td>
+                    <td><%= session.start_time.toLocaleString("en-US") %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User Count</td>
+                    <td><%= session.user_count %></td>
+                    
+
+                </tr>
+                <tr>
+                    <td>Complete Users</td>
+                    <td><%= session.complete_users %></td>
+                </tr>
+                <tr>
+                    <td>Stock 1</td>
+                    <td><%= session.stock1 %></td>
+                </tr>
+                <tr>
+                    <td>Stock 2</td>
+                    <td><%= session.stock2 %></td>
+                </tr>
+                <tr>
+                    <td>Condition A</td>
+                    <td><%= session.conditionA %></td>
+                </tr>
+                <tr>
+                    <td>Condition B</td>
+                    <td><%= session.conditionB %></td>
+
+                </tr>
+
+                <tr>
+                    <td>Condition C</td>
+                    <td><%= session.conditionC %></td>
+
+                </tr>
+                <tr>
+                    <td>Condition D</td>
+                    <td><%= session.conditionD %></td>
+                </tr>
+                <tr>
+                    <td>Initial Condition A</td>
+                    <td><%= session.initialConditionA %></td>
+                </tr>
+                <tr>
+                    <td>Initial Condition B</td>
+                    <td><%= session.initialConditionB %></td>
+                </tr>
+                <tr>
+                    <td>Initial Condition C</td>
+                    <td><%= session.initialConditionC %></td>
+                </tr>
+                <tr>
+                    <td>Initial Condition D</td>
+                    <td><%= session.initialConditionD %></td>
+                </tr>
+
+          </tbody>
+        </table>
+        <br>
+        <h1>Users</h1>
+        <table class="table" style="font-size: 13px;">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Stock 1</th>
+                    <th>Stock 2</th>
+                    <th>Condition</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i<users.length; i++) {%>
+                    <tr>
+                        <td><%= users[i].name %></td>
+                        <td><%= users[i].stock1 %></td>
+                        <td><%= users[i].stock2 %></td>
+                        <td><%= users[i].condition %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <br>
+        <h3>Delete Session</h3>
+        <button type="submit" class="btn btn-danger" onclick="deleteSession('<%= session.session_id %>')">Delete</button>
+      </div>
+    </div>
+    <script>
+        function deleteSession(session_id) {
+            fetch('/admin/delete-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    session_id: session_id
+                })
+            }).then(res => {
+                if (res.status == 404) {
+                    alert(res.status);
+                } else {
+                    window.location.href = '/admin';
+                }
+            })
+        }
+    </script>
+  </body>
+
+</html>

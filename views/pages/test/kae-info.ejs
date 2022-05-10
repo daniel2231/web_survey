@@ -27,7 +27,6 @@
           케이배터리솔루션
         </h3>
       </div>
-      <div></div>
     </div>
 
     <div class="px-4 py-4">
@@ -111,6 +110,11 @@
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
 
     <script>
+      if (localStorage.getItem("condition") == "B" || localStorage.getItem("condition") == "D") {
+        document.querySelectorAll(".help-button").forEach((el) => {
+          el.style.display = "none";
+        });
+      }
       let xValues = ["2018", "2019", "2020", "2021"];
       let yValues = [55, 49, 44, 24, 15];
       let barColors = ["red", "green", "blue", "orange", "brown"];

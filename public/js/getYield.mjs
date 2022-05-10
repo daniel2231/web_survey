@@ -20,9 +20,6 @@ function getYield(stock1_count, stock2_count) {
   let winnerStockRatio;
   let loserStockRatio;
 
-  console.log(firmIssue);
-  console.log(marketCondition);
-
   let getWinnerStock = (stock1, stock2) => {
     if (stock1.stock_count > stock2.stock_count) {
       winnerStock = stock1;
@@ -34,8 +31,6 @@ function getYield(stock1_count, stock2_count) {
   };
 
   getWinnerStock(stock1, stock2);
-
-  console.log(winnerStock.stock_count);
 
   if (winnerStock.stock_count >= 38 && winnerStock.stock_count <= 49) {
     winnerStockRatio = 1.05;
@@ -53,11 +48,6 @@ function getYield(stock1_count, stock2_count) {
     winnerStockRatio = 1.1;
     loserStockRatio = -1.1;
   }
-
-  console.log(winnerStockRatio);
-  console.log(loserStockRatio);
-  console.log(winnerStock);
-  console.log(loserStock);
 
   let winnerStockPrice =
     0.3 * firmIssue +

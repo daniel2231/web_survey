@@ -22,7 +22,7 @@
   <body class="d-flex flex-column h-100">
     <%- include('../../partials/navbar', {title: "주문"}) %>
     <div class="mt-5 p-3 text-center">
-      <h3 class="mb-3">잔고: <span class="bank_balance">100,000</span>원</h3>
+      <h3 class="mb-3">잔고: <span class="bank_balance">200,000</span>원</h3>
       <table class="table mb-5">
         <tbody class="text-center">
           <tr>
@@ -143,7 +143,7 @@
           stock2_total.innerText = (stock_num * 30010).toLocaleString();
         }
         bank_balance.innerHTML = (
-          100000 -
+          200000 -
           parseInt(stock1_total.innerText.replace(/,/g, "")) -
           parseInt(stock2_total.innerText.replace(/,/g, ""))
         ).toLocaleString();
@@ -153,7 +153,7 @@
         console.log('click')
         if (selected_stock == "대한에너지솔루션") {
           let stock_price = stock_num.value * 31260 + parseInt(stock2_total.innerText.replace(/,/g, ""));
-          if (100000 >= stock_price){
+          if (200000 >= stock_price){
             stock1.innerText = stock_num.value.toLocaleString();
             stock1_total.innerText = (stock_num.value * 31260).toLocaleString();
             
@@ -163,7 +163,7 @@
           }
         } else if (selected_stock == "케이배터리솔루션") {
           let stock_price = stock_num.value * 30010 + parseInt(stock1_total.innerText.replace(/,/g, ""));
-          if (100000 >= stock_price){
+          if (200000 >= stock_price){
             stock2.innerText = stock_num.value.toLocaleString();
             stock2_total.innerText = (stock_num.value * 30010).toLocaleString();
 
@@ -175,7 +175,7 @@
           console.log("no select")
         }
         bank_balance.innerHTML = (
-          100000 -
+          200000 -
           parseInt(stock1_total.innerText.replace(/,/g, "")) -
           parseInt(stock2_total.innerText.replace(/,/g, ""))
         ).toLocaleString();

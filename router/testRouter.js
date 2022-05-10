@@ -6,7 +6,29 @@ const Session = require("../models/session");
 const Stock = require("../models/stock");
 
 router.get("/info", (req, res) => {
-  res.render("test/info");
+  Session.find({}, (err, sessions) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(sessions);
+      res.render("test/info", { sessions });
+    }
+  });
+});
+
+router.post("/check-condition", (req, res) => {
+  console.log(req.body.phoneNum)
+  User.findOne({ phone: req.body.phoneNum }, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (!user) {
+        res.sendStatus(404);
+      } else {
+        res.send(user);
+      }
+    }
+  });
 });
 
 router.get("/order-test", (req, res) => {

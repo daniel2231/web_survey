@@ -3,21 +3,21 @@
     <%- include('../../partials/head'); %>
   </head>
   <style>
-    .container{
-      height: -webkit-fill-available;    
+    .container {
+      height: -webkit-fill-available;
     }
-    .row{
+    .row {
       height: inherit;
     }
-    .head{
+    .head {
       display: flex;
       justify-content: space-between;
-      padding : 10px;
+      padding: 10px;
     }
   </style>
   <body
     class=""
-    style="background-color: #fafafa; padding-bottom: 80px; padding-top: 60px;"
+    style="background-color: #fafafa; padding-bottom: 80px; padding-top: 60px"
   >
     <div class="bg-white shadow-sm py-3 text-center fixed-top">
       <div
@@ -43,47 +43,70 @@
       <div></div>
     </div>
 
-    <div class="px-4 py-4" style="height: -webkit-fill-available;">
-      <div class="d-flex align-items-center" style="margin-bottom: 25px; justify-content: space-between;">
+    <div class="px-4 py-4" style="height: -webkit-fill-available">
+      <div
+        class="alert alert-secondary"
+        style="white-space: normal; font-weight: 500; font-size: 14px;"
+      >
+        투자자들이 자유롭게 종목에 대한 토의를 하는 공간입니다.
+        <br />
+        [참고: 뱃지 적용 기준]
+        <br />
+        ● 주식고수
+        <br />
+
+        -최근 14일 이내 매매이력이 1회 이상
+        <br />
+
+        -증권계좌 총 자산 1천만원 이상
+        <br />
+
+        -30일 이내 실현 수익금 200만원 이상
+      </div>
+      <div
+        class="d-flex align-items-center"
+        style="margin-bottom: 25px; justify-content: space-between"
+      >
         <h3 class="mb-3" style="margin-bottom: 0 !important">커뮤니티</h3>
-        <span class="badge bg-secondary" style="white-space:normal; width:60%; font-weight:500;">투자자들이 자유롭게 종목에 대한 토의를 하는 공간입니다. </span>
       </div>
       <div class="container">
         <div class="row row-cols-1">
-          <div class="col" style="border-bottom: 1px solid black" >
-            <div class="head"> 
-              <span> 돈잃은적없음 </span>
+          <div class="col" style="border-bottom: 1px solid black">
+            <div class="head">
+              <span class="username"> 돈잃은적없음 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 5분 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
-              <span> 8282부자 </span>
+            <div class="head">
+              <span class="username"> 8282부자 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 2시간 전 </span>
             </div>
             <span class="content"> </span>
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
-              <span> 마리떼 </span>
+            <div class="head">
+              <span class="username"> 마리떼 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
-              <span> 냥집사 </span>
+            <div class="head">
+              <span class="username"> 냥집사 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
-              <span> 주짱 </span>
+            <div class="head">
+              <span class="username"> 주짱 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 7일 전 </span>
             </div>
             <span class="content"> </span>
@@ -93,26 +116,40 @@
     </div>
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
+      if (localStorage.getItem("condition") !== "A" || localStorage.getItem("condition") !== "B") {
+        document.querySelectorAll(".badge").forEach((el) => {
+          el.style.display = "none";
+        });
+      }
       function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
+        let currentIndex = array.length,
+          randomIndex;
 
         while (currentIndex != 0) {
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex--;
-          [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
         }
         return array;
       }
 
-      let comment = ["지금 진입은 어떨까요?", "테슬라랑 장기계약 얘기 나오던데 계약 되려나ㅎ", 
-      "회사에 대해 공부를 해보면 알겠지만 테슬라 뿐만 아니라 이제 시작입니다.", "영업이익도 상승할 거 같네요 추가 매수 고고ㅎㅎ", "대형주가 된답니다 테슬라 장기 계약 기대중ㅎㅎ"];
+      let comment = [
+        "지금 진입은 어떨까요?",
+        "테슬라랑 장기계약 얘기 나오던데 계약 되려나ㅎ",
+        "회사에 대해 공부를 해보면 알겠지만 테슬라 뿐만 아니라 이제 시작입니다.",
+        "영업이익도 상승할 거 같네요 추가 매수 고고ㅎㅎ",
+        "대형주가 된답니다 테슬라 장기 계약 기대중ㅎㅎ",
+      ];
 
       shuffle(comment);
 
-      let temp = document.querySelectorAll('.content');
-        for(i = 0; i<5; i++){
-          temp[i].innerHTML = comment[i];
-        }
+      let temp = document.querySelectorAll(".content");
+      for (i = 0; i < 5; i++) {
+        temp[i].innerHTML = comment[i];
+      }
     </script>
   </body>
 </html>

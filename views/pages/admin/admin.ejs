@@ -7,7 +7,17 @@
     <div class="d-flex flex-column text-center" style="margin: auto">
       <div class="mt-5">
         <h1>새로운 세션 생성하기</h1>
+        <p>Please refresh the page if the info is incorrect</p>
         <div class="d-grid mx-5">
+          <div class="input-group my-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">A, B, C, D 순서</span>
+            </div>
+            <input type="number" class="form-control condition-input" id="condition-a">
+            <input type="number" class="form-control condition-input" id="condition-b">
+            <input type="number" class="form-control condition-input" id="condition-c">
+            <input type="number" class="form-control condition-input" id="condition-d">
+          </div>
           <button
             class="btn btn-primary "
             type="button"
@@ -24,8 +34,8 @@
             <tr>
               <th>코드</th>
               <th>시작시간</th>
-              <th>종료시간</th>
-              <th>인원</th>
+              <th>참여 인원</th>
+              <th>상세</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +43,14 @@
                 <tr>
                     <td><%= sessions[i].session_id %></td>
                     <td><%= sessions[i].start_time.toLocaleString("en-US") %></td>
-                    <td><%= sessions[i].end_time.toLocaleString("en-US") %></td>
                     <td><%= sessions[i].user_count %></td>
+                    <td> <button
+                      class="btn btn-primary "
+                      type="button"
+                      onclick="location.href = '/admin/session/<%= sessions[i].session_id %>'"
+                    >
+                      상세
+                    </button></td>
                 </tr>
              <% } %>
           </tbody>
@@ -44,9 +60,23 @@
 
     <script>
       function createSession() {
+        let inputA = document.querySelector("#condition-a").value;
+        let inputB = document.querySelector("#condition-b").value;
+        let inputC = document.querySelector("#condition-c").value;
+        let inputD = document.querySelector("#condition-d").value;
+        if (inputA === "" || inputB === "" || inputC === "" || inputD === "") {
+          alert("조건을 입력해주세요");
+          return;
+        }
         fetch("/admin/create-session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            a: document.getElementById("condition-a").value,
+            b: document.getElementById("condition-b").value,
+            c: document.getElementById("condition-c").value,
+            d: document.getElementById("condition-d").value,
+          }),
         }).then((res) => {
           console.log("Request complete! response:", res);
             if (res.status == 200) {
