@@ -43,7 +43,9 @@
             location.href = "/test/loading";
           }
         });
-      } 
+      }
+    } else if (location.href == "/onboarding/order") {
+      location.href = "/onboarding/end";
     } else {
       location.href = "/<%= type %>/order";
     }
