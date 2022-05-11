@@ -22,6 +22,12 @@
     console.log("called");
     if (location.href.endsWith("order")) {
       if (location.href.includes("/test/order")) {
+        let time = document.querySelector(".timer").innerText.match(/\d+/g);
+        let minleft = 9 - Number(time[0]);
+        let secondLeft = 60 - Number(time[1]);
+
+        localStorage.setItem('time', minleft + ":" + secondLeft);
+        
         let phone = localStorage.getItem("phone");
         let stock1 = document.querySelector(".stock1").innerText;
         let stock2 = document.querySelector(".stock2").innerText;
@@ -37,6 +43,7 @@
             stock1: stock1,
             stock2: stock2,
             session_code: session_code,
+            timeLeft: localStorage.getItem("time"),
           }),
         }).then((data) => {
           if (data.status === 200) {

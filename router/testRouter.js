@@ -63,6 +63,7 @@ router.post("/order-stock", (req, res) => {
           session.stock2 += Number(req.body.stock2);
           user.stock1 = req.body.stock1;
           user.stock2 = req.body.stock2;
+          user.timeLeft = req.body.timeLeft;
           user.save((err, user) => {
             if (err) {
               console.log(err);

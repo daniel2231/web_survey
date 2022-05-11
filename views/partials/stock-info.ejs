@@ -1,18 +1,11 @@
 <div class="bg-white shadow-sm py-3 text-center fixed-top">
-  <div
-    style="
+  <div style="
       float: left;
       position: absolute;
       margin-left: 10px;
       vertical-align: center;
-    "
-  >
-    <a
-      class="navbar-brand"
-      href="javascript:history.back()"
-      style="text-decoration: none; color: black"
-      ><i class="bi bi-chevron-left" style="font-size: 23px"></i
-    ></a>
+    ">
+    <a class="navbar-brand" href="javascript:history.back()" style="text-decoration: none; color: black"><i class="bi bi-chevron-left" style="font-size: 23px"></i></a>
   </div>
   <div>
     <h3 style="font-weight: 500; margin-bottom: 0; width: 100%">
@@ -22,17 +15,9 @@
 </div>
 
 <div class="px-3" style="padding-top: 30px; text-align: center">
-  <img
-    src="/images/<%= data.id %>-logo.png"
-    style="width: 80px; height: 80px; border-radius: 50px; margin-bottom: 20px"
-    alt="..."
-  />
+  <img src="/images/<%= data.id %>-logo.png" style="width: 80px; height: 80px; border-radius: 50px; margin-bottom: 20px" alt="..." />
 
-  <h1
-    class="counter"
-    data-target="<%= data.price %>"
-    style="font-weight: 500; margin-bottom: 1px"
-  >
+  <h1 class="counter" data-target="<%= data.price %>" style="font-weight: 500; margin-bottom: 1px">
     <%= data.price %></span>
   </h1>
   <p><%= data.difference %> 원 (<%= data.ratio %>%)</p>
@@ -42,18 +27,20 @@
 </div>
 
 <div class="px-4 py-4">
-  <div class="d-flex gap-2" style="justify-content: space-around; width: 100%">
-    <button
-      class="btn btn-primary py-3"
-      type="button"
-      onclick="location.href='<%= data.id %>-info'"
-      style="border-radius: 10px;flex: 1 1 0px
-      "
-    >
-      투자정보 및 현황 <i class="bi bi-chevron-right"></i>
-    </button>
-    
-    <button
+  <div class="d-flex gap-2 btn-container" style="justify-content: space-around; width: 100%">
+
+
+
+  </div>
+</div>
+<script>
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  const elements = [`<button
       class="btn btn-primary py-3 community"
       type="button"
       onclick="location.href='<%= data.id %>-community'"
@@ -61,10 +48,19 @@
       "
     >
       커뮤니티 <i class="bi bi-chevron-right"></i>
-    </button>
-  </div>
-</div>
-<script>
+    </button>`, `<button
+      class="btn btn-primary py-3"
+      type="button"
+      onclick="location.href='<%= data.id %>-info'"
+      style="border-radius: 10px;flex: 1 1 0px
+      "
+    >
+      투자정보 및 현황 <i class="bi bi-chevron-right"></i>
+    </button>`]
+  shuffle(elements)
+  elements.forEach(element => {
+    document.querySelector('.btn-container').innerHTML += element
+  })
   // Selector
   const counters = document.querySelectorAll(".counter");
   const numberFormatter = Intl.NumberFormat("en-US");
@@ -99,26 +95,26 @@
     plugins: [ChartDataLabels],
     data: {
       labels: xValues,
-      datasets: [
-        {
-          fill: false,
-          lineTension: 0.3,
-          backgroundColor: "rgba(0,0,255,1.0)",
-          borderColor: "rgba(0,0,255,0.1)",
-          data: yValues,
-        },
-      ],
+      datasets: [{
+        fill: false,
+        lineTension: 0.3,
+        backgroundColor: "rgba(0,0,255,1.0)",
+        borderColor: "rgba(0,0,255,0.1)",
+        data: yValues,
+      }, ],
     },
     options: {
-      
+
       scales: {
         y: {
-            min: Math.min(...yValues) - 500,
-            max: Math.max(...yValues) + 500,
+          min: Math.min(...yValues) - 500,
+          max: Math.max(...yValues) + 500,
         }
       },
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: false
+        },
         datalabels: {
           formatter: (val) => {
             let returnValue = val;
