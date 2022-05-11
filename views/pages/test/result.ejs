@@ -148,7 +148,7 @@
       //onload send fetch request to get session status
       let stock1;
       let stock2;
-      let phone = localStorage.getItem("phone")
+      let phone = localStorage.getItem("phone");
       console.log(phone);
       fetch("/test/get-session-status", {
         method: "POST",
@@ -181,8 +181,10 @@
                 result[0] + "원";
               document.querySelector(".current_stock2").innerHTML =
                 result[1] + "원";
-              document.querySelector(".stock1").innerHTML = data.user.stock1 + "주";
-              document.querySelector(".stock2").innerHTML = data.user.stock2 + "주";
+              document.querySelector(".stock1").innerHTML =
+                data.user.stock1 + "주";
+              document.querySelector(".stock2").innerHTML =
+                data.user.stock2 + "주";
 
               document.querySelector(".stock1_per").innerHTML =
                 stock1per.toLocaleString("en-us") + "원";
@@ -195,6 +197,13 @@
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 2,
                 }) + "%";
+              localStorage.setItem(
+                "per",
+                ((total - 200000) / 200000).toLocaleString("en-us", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2,
+                })
+              );
             }
           });
         }
