@@ -99,4 +99,5 @@ router.get("/order", (req, res) => {
 router.get("/end", (req, res) => {
   res.render("onboarding/end");
 });
+
 module.exports = router;
