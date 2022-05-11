@@ -19,6 +19,7 @@
 <script>
   //if window url ends with order, change location href to end
   function checkUrl() {
+    console.log("called");
     if (location.href.endsWith("order")) {
       if (location.href.includes("/test/order")) {
         let phone = localStorage.getItem("phone");
@@ -43,9 +44,10 @@
             location.href = "/test/loading";
           }
         });
+      } else {
+        console.log("first");
+        location.href = "/onboarding/end";
       }
-    } else if (location.href == "/onboarding/order") {
-      location.href = "/onboarding/end";
     } else {
       location.href = "/<%= type %>/order";
     }
