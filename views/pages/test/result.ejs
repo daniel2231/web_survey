@@ -148,6 +148,8 @@
       //onload send fetch request to get session status
       let stock1;
       let stock2;
+      let phone = localStorage.getItem("phone")
+      console.log(phone);
       fetch("/test/get-session-status", {
         method: "POST",
         headers: {
@@ -155,6 +157,7 @@
         },
         body: JSON.stringify({
           session_code: localStorage.getItem("session_code"),
+          phone: localStorage.getItem("phone"),
         }),
       }).then((res) => {
         if (res.status === 200) {
@@ -162,8 +165,9 @@
             if (data.status === "end") {
               location.href = "/test/end";
             } else {
-              stock1 = Number(data.stock1);
-              stock2 = Number(data.stock2);
+              console.log(data);
+              stock1 = Number(data.session.stock1);
+              stock2 = Number(data.session.stock2);
               result = getYield(stock1, stock2);
               let stock1per =
                 parseFloat(result[0].replace(/,/g, "")) * stock1 -
@@ -177,8 +181,8 @@
                 result[0] + "원";
               document.querySelector(".current_stock2").innerHTML =
                 result[1] + "원";
-              document.querySelector(".stock1").innerHTML = stock1 + "주";
-              document.querySelector(".stock2").innerHTML = stock2 + "주";
+              document.querySelector(".stock1").innerHTML = data.user.stock1 + "주";
+              document.querySelector(".stock2").innerHTML = data.user.stock2 + "주";
 
               document.querySelector(".stock1_per").innerHTML =
                 stock1per.toLocaleString("en-us") + "원";
