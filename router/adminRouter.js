@@ -29,7 +29,7 @@ router.get("/session/:id", function (req, res) {
       if (!session) {
         res.sendStatus(404);
       } else {
-        User.find({ session_id: req.params.id }, (err, users) => {
+        User.find({ session_code: req.params.id }, (err, users) => {
           if (err) {
             alert(err);
           } else {

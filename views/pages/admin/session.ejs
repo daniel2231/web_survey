@@ -86,6 +86,11 @@
                     <th>Stock 2</th>
                     <th>Condition</th>
                     <th>구매 시간</th>
+                    <th>대 커뮤</th>
+                    <th>대 상세</th>
+                    <th>케 커뮤</th>
+                    <th>케 상세</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -96,6 +101,10 @@
                         <td><%= users[i].stock2 %></td>
                         <td><%= users[i].condition %></td>
                         <td><%= users[i].timeLeft %></td>
+                        <td><%= users[i].timeDaeCom %></td>
+                        <td><%= users[i].timeDaeInfo %></td>
+                        <td><%= users[i].timeKaeCom %></td>
+                        <td><%= users[i].timeKaeInfo %></td>
                     </tr>
                 <% } %>
             </tbody>
