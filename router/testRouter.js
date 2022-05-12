@@ -64,6 +64,11 @@ router.post("/order-stock", (req, res) => {
           user.stock1 = req.body.stock1;
           user.stock2 = req.body.stock2;
           user.timeLeft = req.body.timeLeft;
+          user.timeDaeCom = req.body.timeDaeCom;
+          user.timeDaeInfo = req.body.timeDaeInfo;
+          user.timeKaeCom = req.body.timeKaeCom;
+          user.timeKaeInfo = req.body.timeKaeInfo;
+
           user.save((err, user) => {
             if (err) {
               console.log(err);

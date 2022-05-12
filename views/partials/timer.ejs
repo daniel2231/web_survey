@@ -32,6 +32,15 @@
         let stock1 = document.querySelector(".stock1").innerText;
         let stock2 = document.querySelector(".stock2").innerText;
         let session_code = localStorage.getItem("session_code");
+        let timeSpentDaeComMin = localStorage.getItem("timeSpentDaeComMin");
+        let timeSpentDaeComSec = localStorage.getItem("timeSpentDaeComSec");
+        let timeSpentDaeInfoMin = localStorage.getItem("timeSpentDaeInfoMin");
+        let timeSpentDaeInfoSec = localStorage.getItem("timeSpentDaeInfoSec");
+        let timeSpentKaeInfoMin  = localStorage.getItem("timeSpentKaeInfoMin");
+        let timeSpentKaeInfoSec = localStorage.getItem("timeSpentKaeInfoSec");
+        let timeSpentKaeComMin = localStorage.getItem("timeSpentKaeComMin");
+        let timeSpentKaeComSec = localStorage.getItem("timeSpentKaeComSec");
+
         console.log(phone, stock1, stock2);
         fetch("/test/order-stock", {
           method: "POST",
@@ -44,6 +53,10 @@
             stock2: stock2,
             session_code: session_code,
             timeLeft: localStorage.getItem("time"),
+            timeDaeCom: timeSpentDaeComMin + ":" + timeSpentDaeComSec,
+            timeDaeInfo: timeSpentDaeInfoMin + ":" + timeSpentDaeInfoSec,
+            timeKaeCom: timeSpentKaeComMin + ":" + timeSpentKaeComSec,
+            timeKaeInfo: timeSpentKaeInfoMin + ":" + timeSpentKaeInfoSec,
           }),
         }).then((data) => {
           if (data.status === 200) {
