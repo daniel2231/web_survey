@@ -55,6 +55,22 @@
              <% } %>
           </tbody>
         </table>
+        <div>
+          <button
+            class="btn btn-primary "
+            type="button"
+            onclick="getSessionData()"
+          >
+            유저 데이터 받기
+          </button>
+          <button
+            class="btn btn-primary "
+            type="button"
+            onclick="location.href = '/admin/session/create'"
+          >
+            세션 데이터 받기
+          </button>
+        </div>
       </div>
     </div>
 
@@ -91,6 +107,20 @@
         if (localStorage.getItem("webToken") == null) {
           location.href = "admin/login";
         }
+      }
+
+      function getSessionData() {
+        fetch("/admin/download-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }).then((res) => {
+          console.log("Request complete! response:", res);
+          if (res.status == 200) {
+            location.reload();
+          } else {
+            alert("세션 가져오기 실패");
+          }
+        });
       }
     </script>
   </body>

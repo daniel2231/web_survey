@@ -5,6 +5,7 @@ const Session = require("../models/session");
 const User = require("../models/user");
 const fs = require("fs");
 const Stock = require("../models/stock");
+const fastcsv = require("fast-csv");
 
 function makeid(length) {
   let result = "";
@@ -45,12 +46,36 @@ router.get("/session/:id", function (req, res) {
   });
 });
 
+router.post("/download-session", function (req, res) {
+  Session.find({}, (err, session) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (!session) {
+        console.log("No session");
+        res.sendStatus(404);
+      } else {
+        console.log(session);
+        let data = JSON.stringify(session);
+        console.log(data)
+        const ws = fs.createWriteStream("sessions.csv");
+        fastcsv
+          .write(data, { headers: true })
+          .on("finish", function () {
+            console.log("Write to session.csv successful");
+          })
+          .pipe(ws);
+      }
+    }
+  });
+});
+
 router.post("/delete-session", (req, res) => {
   let session_id = req.body.session_id;
-  console.log(session_id)
+  console.log(session_id);
   Session.deleteOne({ session_id: session_id }, (err, session) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       if (!session) {
         res.sendStatus(404);
@@ -67,7 +92,6 @@ router.post("/create-session", async (req, res) => {
   const end_time = new Date();
   end_time.setHours(end_time.getHours() + 1);
   const user_count = 0;
-  
 
   const newSession = new Session({
     session_id,
@@ -106,7 +130,7 @@ router.post("/create-session", async (req, res) => {
 
   await newSession.save((err, session) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       res.redirect("/admin");
     }
@@ -116,7 +140,7 @@ router.post("/create-session", async (req, res) => {
 router.get("/", (req, res) => {
   Session.find({}, (err, sessions) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       res.render("admin/admin", { sessions });
     }

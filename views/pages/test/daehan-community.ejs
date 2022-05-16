@@ -116,60 +116,35 @@
     </div>
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
-      if (localStorage.getItem("timeSpentDaeComMin") === null) {
-        //start a timer
-        // countup timer
-        let minutes, seconds;
-        let totalSeconds = 0;
-        setInterval(setTime, 1000);
+     let minutes = localStorage.getItem("timeSpentDaeComMin") ? Number(localStorage.getItem("timeSpentDaeComMin")) : 0;
+      let seconds = localStorage.getItem("timeSpentDaeComSec") ? Number(localStorage.getItem("timeSpentDaeComSec")) : 0;
+      let totalSeconds = Number(minutes) * 60 + Number(seconds);
+      setInterval(setTime, 1000);
 
-        function setTime() {
-          ++totalSeconds;
-          seconds = pad(totalSeconds % 60);
-          minutes = pad(parseInt(totalSeconds / 60));
-        }
-
-        function pad(val) {
-          let valString = val + "";
-          if (valString.length < 2) {
-            return "0" + valString;
-          } else {
-            return valString;
-          }
-        }
-        onbeforeunload = function () {
-          localStorage.setItem("timeSpentDaeComMin", minutes);
-          localStorage.setItem("timeSpentDaeComSec", seconds);
-        };
-      } else {
-        let minutes = localStorage.getItem("timeSpentDaeComMin");
-        let seconds = localStorage.getItem("timeSpentDaeComSec");
-        let totalSeconds = Number(minutes) * 60 + Number(seconds);
-        setInterval(setTime, 1000);
-
-        function setTime() {
-          ++totalSeconds;
-          seconds = pad(totalSeconds % 60);
-          minutes = pad(parseInt(totalSeconds / 60));
-        }
-
-        function pad(val) {
-          let valString = val + "";
-          if (valString.length < 2) {
-            return "0" + valString;
-          } else {
-            return valString;
-          }
-        }
-
-        onbeforeunload = function () {
-          localStorage.setItem("timeSpentDaeComMin", minutes);
-          localStorage.setItem("timeSpentDaeComSec", seconds);
-        };
+      function setTime() {
+        ++totalSeconds;
+        seconds = pad(totalSeconds % 60);
+        minutes = pad(parseInt(totalSeconds / 60));
       }
 
-      if (localStorage.getItem("condition") == "C" || localStorage.getItem("condition") == "D") {
+      function pad(val) {
+        let valString = val + "";
+        if (valString.length < 2) {
+          return "0" + valString;
+        } else {
+          return valString;
+        }
+      }
 
+      onbeforeunload = function () {
+        localStorage.setItem("timeSpentDaeComMin", minutes);
+        localStorage.setItem("timeSpentDaeComSec", seconds);
+      };
+
+      if (
+        localStorage.getItem("condition") == "C" ||
+        localStorage.getItem("condition") == "D"
+      ) {
         document.querySelectorAll(".badge").forEach((el) => {
           el.style.display = "none";
         });
