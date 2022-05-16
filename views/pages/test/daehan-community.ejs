@@ -3,16 +3,16 @@
     <%- include('../../partials/head'); %>
   </head>
   <style>
-    .container{
-      height: -webkit-fill-available;    
+    .container {
+      height: -webkit-fill-available;
     }
-    .row{
+    .row {
       height: inherit;
     }
-    .head{
+    .head {
       display: flex;
       justify-content: space-between;
-      padding : 10px;
+      padding: 10px;
     }
   </style>
   <body
@@ -43,47 +43,70 @@
       <div></div>
     </div>
 
-    <div class="px-4 py-4" style="height: -webkit-fill-available;">
-      <div class="d-flex align-items-center" style="margin-bottom: 25px; justify-content: space-between;">
+    <div class="px-4 py-4" style="height: -webkit-fill-available">
+      <div
+        class="alert alert-secondary"
+        style="white-space: normal; font-weight: 500; font-size: 14px"
+      >
+        투자자들이 자유롭게 종목에 대한 토의를 하는 공간입니다.
+        <br />
+        [참고: 뱃지 적용 기준]
+        <br />
+        ● 주식고수
+        <br />
+
+        -최근 14일 이내 매매이력이 1회 이상
+        <br />
+
+        -증권계좌 총 자산 1천만원 이상
+        <br />
+
+        -30일 이내 실현 수익금 200만원 이상
+      </div>
+      <div
+        class="d-flex align-items-center"
+        style="margin-bottom: 25px; justify-content: space-between"
+      >
         <h3 class="mb-3" style="margin-bottom: 0 !important">커뮤니티</h3>
-        <span class="badge bg-secondary" style="white-space:normal; width:60%; font-weight:500;">투자자들이 자유롭게 종목에 대한 토의를 하는 공간입니다. </span>
       </div>
       <div class="container">
         <div class="row row-cols-1">
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
+            <div class="head">
               <span> 물주왕 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 30분 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
+            <div class="head">
               <span> 고구마사이다 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 1시간 전 </span>
             </div>
             <span class="content"> </span>
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
+            <div class="head">
               <span> 가즈아 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
+            <div class="head">
               <span> 63빌딩 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
-
           </div>
           <div class="col" style="border-bottom: 1px solid black">
-            <div class="head"> 
+            <div class="head">
               <span> 부자의꿈 </span>
+              <span class="bg-success badge">주식고수</span>
               <span> 4일 전 </span>
             </div>
             <span class="content"> </span>
@@ -93,26 +116,41 @@
     </div>
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
+      if (localStorage.getItem("condition") == "C" || localStorage.getItem("condition") == "D") {
+
+        document.querySelectorAll(".badge").forEach((el) => {
+          el.style.display = "none";
+        });
+      }
       function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
+        let currentIndex = array.length,
+          randomIndex;
 
         while (currentIndex != 0) {
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex--;
-          [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
         }
         return array;
       }
 
-      let comment = ["대한엔솔 배터리 리콜 실화임? 맨날 내가 사면 뚝 떨어지더라.. 아휴 ㅠ", "헉.. 배터리 화재 위험으로 리콜한다네요 ㅠㅠ", 
-      "대한엔솔 영업 이익 떨어질 거 같다네요 어쩌죠 ㅠ", "배터리 화재 위험 진짜에요? 추매하려 했는데 ㅠ", "지금 추매는 무리겠죠?"];
+      let comment = [
+        "대한엔솔 배터리 리콜 실화임? 맨날 내가 사면 뚝 떨어지더라.. 아휴 ㅠ",
+        "헉.. 배터리 화재 위험으로 리콜한다네요 ㅠㅠ",
+        "대한엔솔 영업 이익 떨어질 거 같다네요 어쩌죠 ㅠ",
+        "배터리 화재 위험 진짜에요? 추매하려 했는데 ㅠ",
+        "지금 추매는 무리겠죠?",
+      ];
 
       shuffle(comment);
 
-      let temp = document.querySelectorAll('.content');
-        for(i = 0; i<5; i++){
-          temp[i].innerHTML = comment[i];
-        }
+      let temp = document.querySelectorAll(".content");
+      for (i = 0; i < 5; i++) {
+        temp[i].innerHTML = comment[i];
+      }
     </script>
   </body>
 </html>

@@ -1,9 +1,34 @@
 const express = require("express");
+const session = require("../models/session");
 const router = express.Router();
-const fs = require("fs");
+const User = require("../models/user");
+const Session = require("../models/session");
+const Stock = require("../models/stock");
 
 router.get("/info", (req, res) => {
-  res.render("test/info");
+  Session.find({}, (err, sessions) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(sessions);
+      res.render("test/info", { sessions });
+    }
+  });
+});
+
+router.post("/check-condition", (req, res) => {
+  console.log(req.body.phoneNum)
+  User.findOne({ phone: req.body.phoneNum }, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (!user) {
+        res.sendStatus(404);
+      } else {
+        res.send(user);
+      }
+    }
+  });
 });
 
 router.get("/order-test", (req, res) => {
@@ -12,6 +37,43 @@ router.get("/order-test", (req, res) => {
 
 router.get("/order", (req, res) => {
   res.render("test/order");
+});
+
+router.post("/order-stock", (req, res) => {
+  console.log(req.body);
+  User.findOne({ phone: req.body.phone }, (err, user) => {
+    Session.findOne({ session_id: req.body.session_code }, (err, session) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (!session) {
+          console.log("세션이 없습니다.");
+        } else {
+          session.complete_users += 1;
+          session.save();
+        }
+      }
+      if (err) {
+        console.log(err);
+      } else {
+        if (!user) {
+          res.sendStatus(404);
+        } else {
+          session.stock1 += Number(req.body.stock1);
+          session.stock2 += Number(req.body.stock2);
+          user.stock1 = req.body.stock1;
+          user.stock2 = req.body.stock2;
+          user.save((err, user) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.sendStatus(200);
+            }
+          });
+        }
+      }
+    });
+  });
 });
 
 router.get("/daehan", (req, res) => {
@@ -44,6 +106,35 @@ router.get("/survey", (req, res) => {
 
 router.get("/result", (req, res) => {
   res.render("test/result");
+});
+
+router.post("/get-results", (req, res) => {
+  Session.find({ session_id: req.session_code }, (err, sessions) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(sessions);
+    }
+  });
+});
+
+router.post("/get-session-status", (req, res) => {
+  Session.findOne({ session_id: req.body.session_code }, (err, session) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (!session) {
+        console.log("세션이 없습니다.");
+      } else {
+        //respond send session data
+        res.send(session);
+      }
+    }
+  });
+});
+
+router.get("/loading", (req, res) => {
+  res.render("test/loading");
 });
 
 router.get("/end", (req, res) => {

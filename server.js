@@ -4,7 +4,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 8000;
-const bodyParser = require("body-parser");
 const path = require("path");
 const { MONGO_URI } = process.env;
 
@@ -13,21 +12,8 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
-// Live reload code
-const livereload = require("livereload");
-const liveReloadServer = livereload.createServer();
-const connectLivereload = require("connect-livereload");
-liveReloadServer.watch(path.join(__dirname, "/public"));
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
-app.use(connectLivereload());
-
 app.set("views", __dirname + "/views/pages");
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json())
 

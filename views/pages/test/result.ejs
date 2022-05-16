@@ -6,48 +6,48 @@
     p {
       text-align: center;
     }
-    table{
-        text-align:center;
+    table {
+      text-align: center;
     }
   </style>
   <body class="d-flex flex-column h-100">
     <%- include('../../partials/navbar', {title: "투자 결과"}) %>
     <div class="mt-5 p-3">
-        <table class="table table-bordered">
-            <tr>
-                <td> </td>
-                <th>대한에너지솔루션</th>
-                <th>케이배터리솔루션</th>
-            </tr>
-            <tr>
-                <th>구매가</th>
-                <td>31,260원</td>
-                <td>30,010원</td>
-            </tr>
-            <tr>
-                <th>현재가</th>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>보유수량</th>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>수익</th>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th colspan="2">TOTAL</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th colspan="2">최종수익률</th>
-                <td></td>
-            </tr>
-        </table>
+      <table class="table table-bordered">
+        <tr>
+          <td></td>
+          <th>대한에너지솔루션</th>
+          <th>케이배터리솔루션</th>
+        </tr>
+        <tr>
+          <th>구매가</th>
+          <td>31,260원</td>
+          <td>30,010원</td>
+        </tr>
+        <tr>
+          <th>현재가</th>
+          <td class="current_stock1"></td>
+          <td class="current_stock2"></td>
+        </tr>
+        <tr>
+          <th>보유수량</th>
+          <td class="stock1"></td>
+          <td class="stock2"></td>
+        </tr>
+        <tr>
+          <th>수익</th>
+          <td class="stock1_per"></td>
+          <td class="stock2_per"></td>
+        </tr>
+        <tr>
+          <th colspan="2">TOTAL</th>
+          <td class="total"></td>
+        </tr>
+        <tr>
+          <th colspan="2">최종수익률</th>
+          <td class="total_per"></td>
+        </tr>
+      </table>
     </div>
     <div>
       <div class="d-grid fixed-bottom">
@@ -59,7 +59,142 @@
         </button>
       </div>
     </div>
-    <script>
+    <script type="module">
+      let result;
+      function getYield(stock1_count, stock2_count) {
+        let stock1 = {
+          stock_name: "대한에너지솔루션",
+          price: 31260,
+          stock_count: stock1_count,
+        };
+
+        let stock2 = {
+          stock_name: "케이배터리솔루션",
+          price: 30010,
+          stock_count: stock2_count,
+        };
+
+        let firmIssue = Math.floor(Math.random() * (3000 - -3000 + 1)) + -3000;
+        let marketCondition =
+          Math.floor(Math.random() * (3000 - -3000 + 1)) + -3000;
+        let winnerStock;
+        let loserStock;
+        let winnerStockRatio;
+        let loserStockRatio;
+
+        let getWinnerStock = (stock1, stock2) => {
+          if (stock1.stock_count > stock2.stock_count) {
+            winnerStock = stock1;
+            loserStock = stock2;
+          } else {
+            winnerStock = stock2;
+            loserStock = stock1;
+          }
+        };
+
+        getWinnerStock(stock1, stock2);
+
+        if (winnerStock.stock_count >= 38 && winnerStock.stock_count <= 49) {
+          winnerStockRatio = 1.05;
+          loserStockRatio = -1.05;
+        } else if (
+          winnerStock.stock_count >= 49 &&
+          winnerStock.stock_count <= 59
+        ) {
+          winnerStockRatio = 1.07;
+          loserStockRatio = -1.07;
+        } else if (
+          winnerStock.stock_count >= 59 &&
+          winnerStock.stock_count <= 69
+        ) {
+          winnerStockRatio = 1.09;
+          loserStockRatio = -1.09;
+        } else if (
+          winnerStock.stock_count >= 69 &&
+          winnerStock.stock_count <= 79
+        ) {
+          winnerStockRatio = 1.1;
+          loserStockRatio = -1.1;
+        } else {
+          winnerStockRatio = 0;
+          loserStockRatio = 0;
+        }
+
+        let winnerStockPrice =
+          0.3 * firmIssue +
+          0.2 * marketCondition +
+          0.5 * (winnerStockRatio * winnerStock.price);
+        let loserStockPrice =
+          0.3 * firmIssue +
+          0.2 * marketCondition +
+          0.5 * (loserStockRatio * loserStock.price);
+
+        let resultWinnerStock = (
+          winnerStockPrice + stock1.price
+        ).toLocaleString("en-us", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+
+        let resultLoserStock = (loserStockPrice + stock2.price).toLocaleString(
+          "en-us",
+          {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }
+        );
+        return [resultWinnerStock, resultLoserStock];
+      }
+      //onload send fetch request to get session status
+      let stock1;
+      let stock2;
+      fetch("/test/get-session-status", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session_code: localStorage.getItem("session_code"),
+        }),
+      }).then((res) => {
+        if (res.status === 200) {
+          res.json().then((data) => {
+            if (data.status === "end") {
+              location.href = "/test/end";
+            } else {
+              stock1 = Number(data.stock1);
+              stock2 = Number(data.stock2);
+              result = getYield(stock1, stock2);
+              let stock1per =
+                parseFloat(result[0].replace(/,/g, "")) * stock1 -
+                31260 * stock1;
+              let stock2per =
+                parseFloat(result[1].replace(/,/g, "")) * stock2 -
+                30010 * stock2;
+              let total = stock1per + stock2per;
+
+              document.querySelector(".current_stock1").innerHTML =
+                result[0] + "원";
+              document.querySelector(".current_stock2").innerHTML =
+                result[1] + "원";
+              document.querySelector(".stock1").innerHTML = stock1 + "주";
+              document.querySelector(".stock2").innerHTML = stock2 + "주";
+
+              document.querySelector(".stock1_per").innerHTML =
+                stock1per.toLocaleString("en-us") + "원";
+              document.querySelector(".stock2_per").innerHTML =
+                stock2per.toLocaleString("en-us") + "원";
+              document.querySelector(".total").innerHTML =
+                total.toLocaleString("en-us") + "원";
+              document.querySelector(".total_per").innerHTML =
+                ((total - 200000) / 200000).toLocaleString("en-us", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2,
+                }) + "%";
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>

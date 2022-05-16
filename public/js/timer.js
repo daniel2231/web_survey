@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       +new Date(parseInt(window.localStorage.getItem("endTime"))) +
       1000 * (60 * minutes + seconds) +
       500;
-    console.log(endTime);
 
     updateTimer();
   }

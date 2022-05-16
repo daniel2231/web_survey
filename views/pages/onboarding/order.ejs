@@ -44,7 +44,7 @@
       <div></div>
     </div>
     <div class="mt-5 p-3 text-center">
-      <h3 class="mb-3">잔고: <span class="bank_balance">100,000</span>원</h3>
+      <h3 class="mb-3">잔고: <span class="bank_balance">200,000</span>원</h3>
       <table class="table mb-5">
         <tbody class="text-center">
           <tr>
@@ -150,7 +150,7 @@
         console.log('click')
           if (selected_stock == "수기이노텍") {
             let stock_price = stock_num.value * 38150 + parseInt(stock2_total.innerText.replace(/,/g, ""));
-            if (100000 >= stock_price){
+            if (200000 >= stock_price){
               stock1.innerText = stock_num.value.toLocaleString();
               stock1_total.innerText = (stock_num.value * 38150).toLocaleString();
             } else{
@@ -159,9 +159,9 @@
             }
           } else if (selected_stock == "인의전기") {
             let stock_price = stock_num.value *30100 + parseInt(stock1_total.innerText.replace(/,/g, ""));
-            if( 100000 >= stock_price){
+            if( 200000 >= stock_price){
               stock2.innerText = stock_num.value.toLocaleString();
-              stock2_total.innerText = (stock_num * 30100).toLocaleString();
+              stock2_total.innerText = (stock_num.value * 30100).toLocaleString();
             } else{
               stock_num.innerText ="";
               alert("잔고가 부족합니다.");
@@ -170,7 +170,7 @@
             console.log("no select")
           }
         bank_balance.innerHTML = (
-          100000 -
+          200000 -
           parseInt(stock1_total.innerText.replace(/,/g, "")) -
           parseInt(stock2_total.innerText.replace(/,/g, ""))
         ).toLocaleString();
@@ -208,7 +208,7 @@
           stock2_total.innerText = (stock_num * stock_price).toLocaleString();
         }
         bank_balance.innerHTML = (
-          100000 -
+          200000 -
           parseInt(stock1_total.innerText.replace(/,/g, "")) -
           parseInt(stock2_total.innerText.replace(/,/g, ""))
         ).toLocaleString();
