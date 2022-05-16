@@ -25,8 +25,13 @@
         let stock1 = document.querySelector(".stock1").innerText;
         let stock2 = document.querySelector(".stock2").innerText;
         let session_code = localStorage.getItem("session_code");
+
         console.log(phone, stock1, stock2);
-        fetch("/test/order-stock", {
+
+        if (parseInt(stock1)+parseInt(stock2) != 6 ){
+          alert('잔고를 모두 사용하세요');
+        }else{
+          fetch("/test/order-stock", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -44,6 +49,7 @@
           }
         });
       }
+      }        
     } else if (location.href == "/onboarding/order") {
       location.href = "/onboarding/end";
     } else {
