@@ -111,6 +111,40 @@
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
 
     <script>
+      let minutes = localStorage.getItem("timeSpentDaeInfoMin") ? Number(localStorage.getItem("timeSpentDaeInfoMin")) : 0;
+      let seconds = localStorage.getItem("timeSpentDaeInfoSec") ? Number(localStorage.getItem("timeSpentDaeInfoSec")) : 0;
+      let totalSeconds = Number(minutes) * 60 + Number(seconds);
+      setInterval(setTime, 1000);
+
+      function setTime() {
+        ++totalSeconds;
+        seconds = pad(totalSeconds % 60);
+        minutes = pad(parseInt(totalSeconds / 60));
+      }
+
+      function pad(val) {
+        let valString = val + "";
+        if (valString.length < 2) {
+          return "0" + valString;
+        } else {
+          return valString;
+        }
+      }
+
+      onbeforeunload = function () {
+        localStorage.setItem("timeSpentDaeInfoMin", minutes);
+        localStorage.setItem("timeSpentDaeInfoSec", seconds);
+      };
+
+      if (
+        localStorage.getItem("condition") == "B" ||
+        localStorage.getItem("condition") == "D"
+      ) {
+        document.querySelectorAll(".help-button").forEach((el) => {
+          el.style.display = "none";
+        });
+      }
+
       let xValues = ["2018", "2019", "2020", "2021"];
       let yValues = [55, 49, 44, 24, 15];
       let barColors = ["red", "green", "blue", "orange", "brown"];

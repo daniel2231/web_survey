@@ -10,6 +10,11 @@ const userSchema = new mongoose.Schema(
     stock2: { type: String},
     session_code: { type: String, required: true },
     condition: { type: String, required: true },
+    timeLeft: { type: String },
+    timeDaeCom: { type: String },
+    timeDaeInfo: { type: String },
+    timeKaeCom: { type: String },
+    timeKaeInfo: { type: String }
   },
   {
     timestamps: true,

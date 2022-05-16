@@ -7,7 +7,7 @@
       <h5 style="text-align:center">실험이 종료되었습니다<br /> 수고하셨습니다.</h5>
       <br />
     
-      <h5 style="text-align:center"> 귀하의 수익률 : () %</h5>
+      <h5 style="text-align:center"> 귀하의 수익률 : (<span class="per"></span>) %</h5>
        <br />
       <h5 style="text-align:center"> 관리자에게 참여비를<br />수령하시길 바랍니다.</h5>
     </div>
@@ -23,6 +23,9 @@
     </div>
     <script>
         let button = document.querySelector('button');
+        let per = localStorage.getItem('per');
+
+        document.querySelector('.per').innerText = per;
         setTimeout(() => {
             button.removeAttribute('disabled');
         }, 5000);

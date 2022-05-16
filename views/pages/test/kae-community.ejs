@@ -46,7 +46,7 @@
     <div class="px-4 py-4" style="height: -webkit-fill-available">
       <div
         class="alert alert-secondary"
-        style="white-space: normal; font-weight: 500; font-size: 14px;"
+        style="white-space: normal; font-weight: 500; font-size: 14px"
       >
         투자자들이 자유롭게 종목에 대한 토의를 하는 공간입니다.
         <br />
@@ -116,7 +116,41 @@
     </div>
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
     <script>
-      if (localStorage.getItem("condition") !== "A" || localStorage.getItem("condition") !== "B") {
+      //record time spent in this website and save to localstroage
+
+      let minutes = localStorage.getItem("timeSpentKaeComMin")
+        ? Number(localStorage.getItem("timeSpentKaeComMin"))
+        : 0;
+      let seconds = localStorage.getItem("timeSpentKaeComSec")
+        ? Number(localStorage.getItem("timeSpentKaeComSec"))
+        : 0;
+      let totalSeconds = Number(minutes) * 60 + Number(seconds);
+      setInterval(setTime, 1000);
+
+      function setTime() {
+        ++totalSeconds;
+        seconds = pad(totalSeconds % 60);
+        minutes = pad(parseInt(totalSeconds / 60));
+      }
+
+      function pad(val) {
+        let valString = val + "";
+        if (valString.length < 2) {
+          return "0" + valString;
+        } else {
+          return valString;
+        }
+      }
+
+      onbeforeunload = function () {
+        localStorage.setItem("timeSpentKaeComMin", minutes);
+        localStorage.setItem("timeSpentKaeComSec", seconds);
+      };
+
+      if (
+        localStorage.getItem("condition") !== "A" ||
+        localStorage.getItem("condition") !== "B"
+      ) {
         document.querySelectorAll(".badge").forEach((el) => {
           el.style.display = "none";
         });

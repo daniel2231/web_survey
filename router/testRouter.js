@@ -17,7 +17,7 @@ router.get("/info", (req, res) => {
 });
 
 router.post("/check-condition", (req, res) => {
-  console.log(req.body.phoneNum)
+  console.log(req.body.phoneNum);
   User.findOne({ phone: req.body.phoneNum }, (err, user) => {
     if (err) {
       console.log(err);
@@ -63,6 +63,12 @@ router.post("/order-stock", (req, res) => {
           session.stock2 += Number(req.body.stock2);
           user.stock1 = req.body.stock1;
           user.stock2 = req.body.stock2;
+          user.timeLeft = req.body.timeLeft;
+          user.timeDaeCom = req.body.timeDaeCom;
+          user.timeDaeInfo = req.body.timeDaeInfo;
+          user.timeKaeCom = req.body.timeKaeCom;
+          user.timeKaeInfo = req.body.timeKaeInfo;
+
           user.save((err, user) => {
             if (err) {
               console.log(err);
@@ -127,7 +133,22 @@ router.post("/get-session-status", (req, res) => {
         console.log("세션이 없습니다.");
       } else {
         //respond send session data
-        res.send(session);
+        if (req.body.phone) {
+          User.findOne({ phone: req.body.phone }, (err, user) => {
+            if (err) {
+              console.log(err);
+            } else {
+              if (!user) {
+                console.log("no user");
+                res.sendStatus(404);
+              } else {
+                res.send({ user, session });
+              }
+            }
+          });
+        } else {
+          res.send(session);
+        }
       }
     }
   });
