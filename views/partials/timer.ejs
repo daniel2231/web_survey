@@ -29,8 +29,8 @@
         localStorage.setItem('time', minleft + ":" + secondLeft);
         
         let phone = localStorage.getItem("phone");
-        let stock1 = document.querySelector(".stock1").innerText;
-        let stock2 = document.querySelector(".stock2").innerText;
+        let stock1 = document.querySelector(".stock1") ? 0 : document.querySelector(".stock1").innerText;
+        let stock2 = document.querySelector(".stock2") ? 0 : document.querySelector(".stock2").innerText;
         let session_code = localStorage.getItem("session_code");
         let timeSpentDaeComMin = localStorage.getItem("timeSpentDaeComMin");
         let timeSpentDaeComSec = localStorage.getItem("timeSpentDaeComSec");
@@ -43,7 +43,7 @@
 
         console.log(phone, stock1, stock2);
 
-        if(parseInt(stock1)+ parseInt(stock2) != 6 ){
+        if(parseInt(stock1) + parseInt(stock2) != 6 ){
           alert('잔고를 모두 사용하세요!');
         } else{
           fetch("/test/order-stock", {

@@ -150,11 +150,10 @@
       }
 
       let updateTable = () => {
-        console.log('click')
         if (selected_stock == "대한에너지솔루션") {
           let stock_price = stock_num.value * 31260 + parseInt(stock2_total.innerText.replace(/,/g, ""));
           if (200000 >= stock_price){
-            stock1.innerText = stock_num.value.toLocaleString();
+            stock1.innerText = stock_num.value == "" ? 0 : stock_num.value.toLocaleString();
             stock1_total.innerText = (stock_num.value * 31260).toLocaleString();
             
           }else{
@@ -164,7 +163,7 @@
         } else if (selected_stock == "케이배터리솔루션") {
           let stock_price = stock_num.value * 30010 + parseInt(stock1_total.innerText.replace(/,/g, ""));
           if (200000 >= stock_price){
-            stock2.innerText = stock_num.value.toLocaleString();
+            stock2.innerText = stock_num.value == "" ? 0 : stock_num.value.toLocaleString();
             stock2_total.innerText = (stock_num.value * 30010).toLocaleString();
 
           } else{
@@ -172,6 +171,7 @@
             alert("잔고가 부족합니다.");
           }
         } else {
+          stock_num.innerText="";
           console.log("no select")
         }
         bank_balance.innerHTML = (
@@ -186,7 +186,7 @@
         stock_num.value += num;
       }
 
-      function erase(type) {
+      function erase(type) { 
         if (type == "all") {
           stock_num.value = "";
         } else if (type == "one") {
