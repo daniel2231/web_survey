@@ -29,8 +29,9 @@
         localStorage.setItem('time', minleft + ":" + secondLeft);
         
         let phone = localStorage.getItem("phone");
-        let stock1 = document.querySelector(".stock1") ? 0 : document.querySelector(".stock1").innerText;
-        let stock2 = document.querySelector(".stock2") ? 0 : document.querySelector(".stock2").innerText;
+        let stock1 = document.querySelector(".stock1") == "" ? 0 : document.querySelector(".stock1").innerText;
+        let stock2 = document.querySelector(".stock2") == "" ? 0 : document.querySelector(".stock2").innerText;
+        console.log(stock1 + stock2)
         let session_code = localStorage.getItem("session_code");
         let timeSpentDaeComMin = localStorage.getItem("timeSpentDaeComMin");
         let timeSpentDaeComSec = localStorage.getItem("timeSpentDaeComSec");

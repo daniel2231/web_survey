@@ -119,6 +119,8 @@
         ++totalSeconds;
         seconds = pad(totalSeconds % 60);
         minutes = pad(parseInt(totalSeconds / 60));
+        localStorage.setItem("timeSpentKaeInfoMin", minutes);
+        localStorage.setItem("timeSpentKaeInfoSec", seconds);
       }
 
       function pad(val) {
@@ -129,11 +131,6 @@
           return valString;
         }
       }
-
-      onbeforeunload = function () {
-        localStorage.setItem("timeSpentKaeInfoMin", minutes);
-        localStorage.setItem("timeSpentKaeInfoSec", seconds);
-      };
 
       if (
         localStorage.getItem("condition") == "B" ||
