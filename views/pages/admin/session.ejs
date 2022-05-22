@@ -82,6 +82,8 @@
             <thead>
                 <tr>
                     <th>User</th>
+                    <th>Bef_Stock 1</th>
+                    <th>Bef_Stock 2</th>
                     <th>Stock 1</th>
                     <th>Stock 2</th>
                     <th>Condition</th>
@@ -97,6 +99,8 @@
                 <% for(let i=0; i<users.length; i++) {%>
                     <tr>
                         <td><%= users[i].name %></td>
+                        <td><%= users[i].bef_stock1 %></td>
+                        <td><%= users[i].bef_stock2 %></td>
                         <td><%= users[i].stock1 %></td>
                         <td><%= users[i].stock2 %></td>
                         <td><%= users[i].condition %></td>

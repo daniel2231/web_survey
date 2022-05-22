@@ -19,61 +19,111 @@
 <script>
   //if window url ends with order, change location href to end
   function checkUrl() {
-    console.log("called");
-    if (location.href.endsWith("order")) {
-      if (location.href.includes("/test/order")) {
+    if (location.href.endsWith("order") || location.href.endsWith("order2")) {
+      console.log(location.pathname)
+      if (location.pathname == "/test/order") {
         let time = document.querySelector(".timer").innerText.match(/\d+/g);
         let minleft = 9 - Number(time[0]);
         let secondLeft = 60 - Number(time[1]);
 
-        localStorage.setItem('time', minleft + ":" + secondLeft);
-        
+        localStorage.setItem("time", minleft + ":" + secondLeft);
+
         let phone = localStorage.getItem("phone");
-        let stock1 = document.querySelector(".stock1") == "" ? 0 : document.querySelector(".stock1").innerText;
-        let stock2 = document.querySelector(".stock2") == "" ? 0 : document.querySelector(".stock2").innerText;
-        console.log(stock1 + stock2)
+        let stock1 =
+          document.querySelector(".stock1") == ""
+            ? 0
+            : document.querySelector(".stock1").innerText;
+        let stock2 =
+          document.querySelector(".stock2") == ""
+            ? 0
+            : document.querySelector(".stock2").innerText;
+        console.log(stock1 + stock2);
         let session_code = localStorage.getItem("session_code");
         let timeSpentDaeComMin = localStorage.getItem("timeSpentDaeComMin");
         let timeSpentDaeComSec = localStorage.getItem("timeSpentDaeComSec");
         let timeSpentDaeInfoMin = localStorage.getItem("timeSpentDaeInfoMin");
         let timeSpentDaeInfoSec = localStorage.getItem("timeSpentDaeInfoSec");
-        let timeSpentKaeInfoMin  = localStorage.getItem("timeSpentKaeInfoMin");
+        let timeSpentKaeInfoMin = localStorage.getItem("timeSpentKaeInfoMin");
         let timeSpentKaeInfoSec = localStorage.getItem("timeSpentKaeInfoSec");
         let timeSpentKaeComMin = localStorage.getItem("timeSpentKaeComMin");
         let timeSpentKaeComSec = localStorage.getItem("timeSpentKaeComSec");
 
         console.log(phone, stock1, stock2);
 
-        if(parseInt(stock1) + parseInt(stock2) != 6 ){
-          alert('잔고를 모두 사용하세요!');
-        } else{
+        if (parseInt(stock1) + parseInt(stock2) != 6) {
+          alert("잔고를 모두 사용하세요!");
+        } else {
           fetch("/test/order-stock", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            phone: phone,
-            stock1: stock1,
-            stock2: stock2,
-            session_code: session_code,
-            timeLeft: localStorage.getItem("time"),
-            timeDaeCom: timeSpentDaeComMin + ":" + timeSpentDaeComSec,
-            timeDaeInfo: timeSpentDaeInfoMin + ":" + timeSpentDaeInfoSec,
-            timeKaeCom: timeSpentKaeComMin + ":" + timeSpentKaeComSec,
-            timeKaeInfo: timeSpentKaeInfoMin + ":" + timeSpentKaeInfoSec,
-          }),
-        }).then((data) => {
-          if (data.status === 200) {
-            //change location href to end
-            location.href = "/test/loading";
-          }
-        });
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              phone: phone,
+              stock1: stock1,
+              stock2: stock2,
+              session_code: session_code,
+              timeLeft: localStorage.getItem("time"),
+              timeDaeCom: timeSpentDaeComMin + ":" + timeSpentDaeComSec,
+              timeDaeInfo: timeSpentDaeInfoMin + ":" + timeSpentDaeInfoSec,
+              timeKaeCom: timeSpentKaeComMin + ":" + timeSpentKaeComSec,
+              timeKaeInfo: timeSpentKaeInfoMin + ":" + timeSpentKaeInfoSec,
+            }),
+          }).then((data) => {
+            if (data.status === 200) {
+              //change location href to end
+              location.href = "/test/loading";
+            }
+          });
+        }
+      } else if (location.pathname == "/test/order2") {
+        let time = document.querySelector(".timer").innerText.match(/\d+/g);
+        console.log(time);
+        let minleft = 9 - Number(time[0]);
+        let secondLeft = 60 - Number(time[1]);
+
+        localStorage.setItem("time", minleft + ":" + secondLeft);
+
+        let phone = localStorage.getItem("phone");
+        let stock1 =
+          document.querySelector(".stock1") == ""
+            ? 0
+            : document.querySelector(".stock1").innerText;
+        let stock2 =
+          document.querySelector(".stock2") == ""
+            ? 0
+            : document.querySelector(".stock2").innerText;
+        console.log(stock1 + stock2);
+        let session_code = localStorage.getItem("session_code");
+
+        if (parseInt(stock1) + parseInt(stock2) != 6) {
+          alert("잔고를 모두 사용하세요!");
+        } else {
+          fetch("/test/order-stock2", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              phone: phone,
+              bef_stock1: stock1,
+              bef_stock2: stock2,
+              session_code: session_code,
+              bef_timeLeft: localStorage.getItem("time"),
+            }),
+          }).then((data) => {
+            if (data.status === 200) {
+              //change location href to end
+              location.href = "/test/info";
+            }
+          });
         }
       } else {
         console.log("first");
         location.href = "/onboarding/end";
       }
+    } else if (location.pathname == "/test/order-test2") {
+      location.href = "/<%= type %>/order2";
     } else {
       location.href = "/<%= type %>/order";
     }

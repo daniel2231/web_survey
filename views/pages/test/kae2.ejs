@@ -1,0 +1,27 @@
+<html lang="en" class="h-100">
+  <head>
+    <%- include('../../partials/head'); %>
+  </head>
+  <body
+    class=""
+    style="background-color: #fafafa; padding-bottom: 80px; padding-top: 60px"
+  >
+    <%- include('../../partials/stock-info', {data: {name: "케이배터리솔루션",
+    id: "kae", price: "30,010", difference: "+218", ratio: "0.73",
+    priceArray: "[31560,30200,29792,30010]"}} ) %>
+
+    <div class="px-4 py-4">
+      <h3 class="mb-3">주요 사업</h3>
+      <div class="d-flex justify-content-center">
+        <div class="text-center px-4">
+          <i
+            class="fa-solid fa-car-battery"
+            style="font-size: 50px; padding-bottom: 15px"
+          ></i>
+          <p>전기차베터리</p>
+        </div>
+      </div>
+    </div>
+    <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
+  </body>
+</html>

@@ -35,8 +35,53 @@ router.get("/order-test", (req, res) => {
   res.render("test/order-test");
 });
 
+router.get("/order-test2", (req, res) => {
+  res.render("test/order-test2");
+});
+
 router.get("/order", (req, res) => {
   res.render("test/order");
+});
+
+router.get("/order2", (req, res) => {
+  res.render("test/order2");
+});
+
+router.get("/info2", (req, res) => {
+  Session.find({}, (err, sessions) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(sessions);
+      res.render("test/info2", { sessions });
+    }
+  });
+});
+
+router.post("/order-stock2", (req, res) => {
+  console.log(req.body);
+  User.findOne({ phone: req.body.phone }, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (!user) {
+        res.sendStatus(404);
+      } else {
+        user.bef_stock1 = req.body.stock1;
+        user.bef_stock2 = req.body.stock2;
+        user.bef_timeLeft2 = req.body.timeLeft;
+
+
+        user.save((err, user) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.sendStatus(200);
+          }
+        });
+      }
+    }
+  });
 });
 
 router.post("/order-stock", (req, res) => {
@@ -86,6 +131,10 @@ router.get("/daehan", (req, res) => {
   res.render("test/daehan");
 });
 
+router.get("/daehan2", (req, res) => {
+  res.render("test/daehan2");
+});
+
 router.get("/daehan-info", (req, res) => {
   res.render("test/daehan-info");
 });
@@ -96,6 +145,10 @@ router.get("/daehan-community", (req, res) => {
 
 router.get("/kae", (req, res) => {
   res.render("test/kae");
+});
+
+router.get("/kae2", (req, res) => {
+  res.render("test/kae2");
 });
 
 router.get("/kae-info", (req, res) => {
