@@ -94,30 +94,29 @@
 
         getWinnerStock(stock1, stock2);
 
-        if (winnerStock.stock_count >= 76 && winnerStock.stock_count <= 95) {
+        if (winnerStock.stock_count >= 30  && winnerStock.stock_count <= 49) {
           winnerStockRatio = 1.05;
           loserStockRatio = -1.05;
         } else if (
-          winnerStock.stock_count >= 96 &&
-          winnerStock.stock_count <= 105
+          winnerStock.stock_count >= 50 &&
+          winnerStock.stock_count <= 69
         ) {
           winnerStockRatio = 1.07;
           loserStockRatio = -1.07;
         } else if (
-          winnerStock.stock_count >= 106 &&
-          winnerStock.stock_count <= 125
+          winnerStock.stock_count >= 70 &&
+          winnerStock.stock_count <= 99
         ) {
           winnerStockRatio = 1.09;
           loserStockRatio = -1.09;
         } else if (
-          winnerStock.stock_count >= 126 &&
-          winnerStock.stock_count <= 150
+          winnerStock.stock_count <= 100
         ) {
-          winnerStockRatio = 1.1;
-          loserStockRatio = -1.1;
+          winnerStockRatio = 1.0;
+          loserStockRatio = -1.0;
         } else {
-          winnerStockRatio = 0;
-          loserStockRatio = 0;
+          winnerStockRatio = 1.05;
+          loserStockRatio = -1.05;
         }
 
         let winnerStockPrice =
