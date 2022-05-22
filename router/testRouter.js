@@ -67,8 +67,8 @@ router.post("/order-stock2", (req, res) => {
       if (!user) {
         res.sendStatus(404);
       } else {
-        user.bef_stock1 = req.body.stock1;
-        user.bef_stock2 = req.body.stock2;
+        user.bef_stock1 = req.body.bef_stock1;
+        user.bef_stock2 = req.body.bef_stock2;
         user.bef_timeLeft2 = req.body.timeLeft;
 
 

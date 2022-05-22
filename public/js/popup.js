@@ -2,8 +2,7 @@ let helpButton = document.querySelector(".help-button");
 let closeButton = document.querySelector(".close-button");
 let popUp = `
 <div class="popup">
-<div class="popup-content">
-  <div class="popup-header">
+
     <div class="d-flex">
       <h2>도움말</h2>
       <i class="fas fa-times close-button" style="margin-left: auto" onclick="document.querySelector('.popup').remove();"></i>
@@ -37,11 +36,7 @@ let popUp = `
       몇%인지를 나타내는 비율이에요.
     </p>
   </div>
-  <div class="popup-footer"></div>
-</div>
 </div>
 `;
 
-helpButton.addEventListener("click", function () {
-  document.querySelector("body").insertAdjacentHTML("beforeend", popUp);
-});
+

@@ -87,10 +87,6 @@
     updateCount();
   }
 
-  if (location.pathname.includes("onboarding")) {
-    document.querySelector(".community").style.display = "none";
-  }
-
   let xValues = ["1달 전", "1주일 전", "어제", "현재"];
   let yValues = <%= data.priceArray %>;
 
