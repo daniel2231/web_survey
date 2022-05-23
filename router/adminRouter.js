@@ -57,7 +57,7 @@ router.post("/download-session", function (req, res) {
       } else {
         console.log(session);
         let data = JSON.stringify(session);
-        console.log(data)
+        console.log(data);
         const ws = fs.createWriteStream("sessions.csv");
         fastcsv
           .write(data, { headers: true })
@@ -88,7 +88,11 @@ router.post("/delete-session", (req, res) => {
 
 router.post("/create-session", async (req, res) => {
   const session_id = makeid(5);
-  const start_time = new Date();
+  const curr = new Date();
+  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+
+  const start_time = new Date(utc + KR_TIME_DIFF);
   const end_time = new Date();
   end_time.setHours(end_time.getHours() + 1);
   const user_count = 0;

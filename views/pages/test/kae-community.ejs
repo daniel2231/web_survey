@@ -62,7 +62,7 @@
         <br />
 
         -30일 이내 실현 수익금 200만원 이상
-        <br>
+        <br />
         -태그가 없다는 것은 해당사항이 없다는 의미입니다
       </div>
       <div
@@ -117,6 +117,30 @@
       </div>
     </div>
     <%- include('../../partials/timer', {btn: "주문", type: "test"}) %>
+    <script src="/js/timeme.min.js"></script>
+    <script type="text/javascript">
+      // Initialize library and start tracking time
+      TimeMe.initialize({
+        currentPageName: "Kae-Community", // current page
+        idleTimeoutInSeconds: 300, // 5 minutes
+      });
+      // for every 1 second
+      setInterval(function () {
+        // call the function to update the time
+        let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+        console.log(timeSpentOnPage);
+      }, 1000);
+
+      // Executes the first 5 times a user leaves the page
+      TimeMe.callWhenUserLeaves(function () {
+        console.log("The user is not currently viewing the page!");
+      });
+
+      // Executes every time a user returns
+      TimeMe.callWhenUserReturns(function () {
+        console.log("The user has come back!");
+      });
+    </script>
     <script>
       //record time spent in this website and save to localstroage
 
