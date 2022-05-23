@@ -126,10 +126,10 @@
         location.pathname.includes("kae2")
       ) {
         location.href = "/<%= type %>/order2";
-      } else if (location.pathname.includes("onboarding")) {
-        location.href = "/<%= type %>/order";
+      } else if (location.pathname == "/onboarding/order") {
+        location.href = "/onboarding/end";
       } else {
-        location.href = "/<%= type %>/order";
+        location.href = "/onboarding/order";
       }
     }
   }
