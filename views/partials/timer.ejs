@@ -128,6 +128,11 @@
         location.href = "/<%= type %>/order2";
       } else if (location.pathname == "/onboarding/order") {
         location.href = "/onboarding/end";
+      } else if (
+        location.pathname == "/test/daehan" ||
+        location.pathname == "/test/kae"
+      ) {
+        location.href = "/order/order";
       } else {
         location.href = "/onboarding/order";
       }
