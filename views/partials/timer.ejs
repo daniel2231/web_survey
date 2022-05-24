@@ -118,24 +118,22 @@
       }
     } else if (location.pathname == "/test/order-test2") {
       location.href = "/<%= type %>/order2";
-    } else if (location.pathname == "/test/order-test") {
+    } else if (location.pathname == "/test/order-test" || location.pathname == "/test/daehan-info" || location.pathname == "/test/kae-info" || location.pathname == "/test/daehan-community" || location.pathname == "/test/kae-community") {
       location.href = "/<%= type %>/order";
+    } else if (
+      location.pathname == "/test/daehan2" ||
+      location.pathname == "/test/kae2"
+    ) {
+      location.href = "/test/order2";
+    } else if (location.pathname == "/onboarding/order") {
+      location.href = "/test/info2";
+    } else if (
+      location.pathname == "/test/daehan" ||
+      location.pathname == "/test/kae"
+    ) {
+      location.href = "/test/order";
     } else {
-      if (
-        location.pathname.includes("daehan2") ||
-        location.pathname.includes("kae2")
-      ) {
-        location.href = "/<%= type %>/order2";
-      } else if (location.pathname == "/onboarding/order") {
-        location.href = "/onboarding/end";
-      } else if (
-        location.pathname == "/test/daehan" ||
-        location.pathname == "/test/kae"
-      ) {
-        location.href = "/test/order";
-      } else {
-        location.href = "/onboarding/order";
-      }
+      location.href = "/onboarding/order";
     }
   }
 </script>
