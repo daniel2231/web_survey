@@ -171,8 +171,8 @@
       }
 
       if (
-        localStorage.getItem("condition") !== "A" ||
-        localStorage.getItem("condition") !== "B"
+        localStorage.getItem("condition") == "C" ||
+        localStorage.getItem("condition") == "D"
       ) {
         document.querySelectorAll(".badge").forEach((el) => {
           el.style.display = "none";
