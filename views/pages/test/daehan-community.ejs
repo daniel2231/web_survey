@@ -77,6 +77,8 @@
             <div class="head">
               <span> 물주왕 </span>
               <span class="bg-success badge">주식고수</span>
+              <span class="bg-danger badge">주식 경력 20년 이상</span>
+              <span class="bg-secondary badge badge-re" style="display: none;">주식 경력 6개월 미만</span>
               <span> 30분 전 </span>
             </div>
             <span class="content"> </span>
@@ -85,6 +87,8 @@
             <div class="head">
               <span> 고구마사이다 </span>
               <span class="bg-success badge">주식고수</span>
+              <span class="bg-primary badge">주식 경력 10년 이상</span>
+              <span class="bg-secondary badge badge-re" style="display: none;">주식 경력 1개월 미만</span>
               <span> 1시간 전 </span>
             </div>
             <span class="content"> </span>
@@ -93,6 +97,8 @@
             <div class="head">
               <span> 가즈아 </span>
               <span class="bg-success badge">주식고수</span>
+              <span class="bg-danger badge">주식 경력 20년 이상</span>
+              <span class="bg-secondary badge badge-re" style="display: none;">주식 경력 6개월 미만</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
@@ -101,6 +107,8 @@
             <div class="head">
               <span> 63빌딩 </span>
               <span class="bg-success badge">주식고수</span>
+              <span class="bg-primary badge">주식 경력 10년 이상</span>
+              <span class="bg-secondary badge badge-re" style="display: none;">주식 경력 1개월 미만</span>
               <span> 1일 전 </span>
             </div>
             <span class="content"> </span>
@@ -109,6 +117,8 @@
             <div class="head">
               <span> 부자의꿈 </span>
               <span class="bg-success badge">주식고수</span>
+              <span class="bg-danger badge">주식 경력 20년 이상</span>
+              <span class="bg-secondary badge badge-re" style="display: none;">주식 경력 1개월 미만</span>
               <span> 4일 전 </span>
             </div>
             <span class="content"> </span>
@@ -150,6 +160,9 @@
       ) {
         document.querySelectorAll(".badge").forEach((el) => {
           el.style.display = "none";
+        });
+        document.querySelectorAll(".badge-re").forEach((el) => {
+          el.style.display = "block";
         });
       }
       function shuffle(array) {

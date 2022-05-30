@@ -31,12 +31,21 @@
     </div>
 
     <div class="px-4 py-4">
+      <div class="alert alert-danger">
+        <p>
+          <b class="changeText">
+            ! 아래 투자 정보는 다가오는 2분기 AI 재무제표 예측을 토대로
+            작성되었습니다. 알고리즘 정확도는 98%입니다. !
+          </b>
+        </p>
+      </div>
       <div
         class="alert alert-secondary info"
         style="white-space: normal; font-weight: 500; font-size: 14px"
       >
-
         <p>
+          <b>여러분의 더욱 빠른 이해를 위해 준비했어요: 재무지표 도움말</b>
+          <br />
           <br />
           <b>PER = 주식가격 / 주당 순이익</b>
           <br />
@@ -173,6 +182,9 @@
         document.querySelectorAll(".info").forEach((el) => {
           el.style.display = "none";
         });
+        document.querySelector(".changeText").innerHTML = `
+        ! 아래 투자 정보는 다가오는 2분기 AI 재무제표 예측을 토대로 작성되었습니다. 알고리즘 정확도는 48%입니다. ! 
+        `
       }
 
       let xValues = ["2018", "2019", "2020", "2021"];
